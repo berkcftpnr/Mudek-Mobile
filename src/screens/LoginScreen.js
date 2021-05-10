@@ -12,20 +12,20 @@ export function LoginScreen({navigation}) {
     <View style={styles.container}>
       <Heading style= {styles.title} >Giriş Yap</Heading>
       <Error error={''} />
-      <Input style={styles.input} 
-      placeholder={'Email'} 
+      <Input style={styles.input}
+      placeholder={'Email'}
       keyboardType= "email-address"
       />
-      <Input style={styles.input} 
-      placeholder={'Şifre'} 
+      <Input style={styles.input}
+      placeholder={'Şifre'}
       secureTextEntry
       />
-      <FilledButton title={'Giriş Yap'} 
-      style={styles.loginButton} 
+      <FilledButton title={'Giriş Yap'}
+      style={styles.loginButton}
       onPress ={() => {}}
       />
-      <FilledButton title={'Üye Ol'} 
-      style={styles.registerButton} 
+      <FilledButton title={'Üye Ol'}
+      style={styles.registerButton}
       onPress ={() => {
         navigation.navigate('Registration');
       }}
@@ -34,7 +34,7 @@ export function LoginScreen({navigation}) {
 
 
       <StatusBar style="auto" />
-      
+
     </View>
   );
 }
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   registerButton: {
       marginVertical: 0,
-      
+
   }
 
 });

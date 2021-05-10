@@ -9,31 +9,33 @@ import { Error } from '../components/Error';
 import { IconButton } from '../components/IconButton';
 
 
-export function RegistrationScreen() {
+export function RegistrationScreen({navigation}) {
   return (
     <View style={styles.container}>
       <Heading style= {styles.title} >Üye Ol</Heading>
-      <IconButton style={styles.closeIcon} name={'close-circle-outline'} />
+      <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
+        navigation.navigate('Login');
+  }}/>
       <Error error={''} />
-      <Input style={styles.input} 
-      placeholder={'Email'} 
+      <Input style={styles.input}
+      placeholder={'Email'}
       keyboardType= "email-address"
       />
-      <Input style={styles.input} 
-      placeholder={'Şifre'} 
+      <Input style={styles.input}
+      placeholder={'Şifre'}
       secureTextEntry
       />
-      <FilledButton title={'Üye Ol'} 
-      style={styles.loginButton} 
+      <FilledButton title={'Üye Ol'}
+      style={styles.loginButton}
       onPress ={() => {}}
       />
-      <FilledButton title={'İletişim'} 
-      style={styles.registerButton} 
+      <FilledButton title={'İletişim'}
+      style={styles.registerButton}
       onPress ={() => {}}
       />
 
       <StatusBar style="auto" />
-      
+
     </View>
   );
 }
@@ -62,6 +64,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 60,
     right: 20,
+
+
   },
 
 });
