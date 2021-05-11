@@ -5315,6 +5315,11 @@
   dependencies:
     "original" "^1.0.0"
 
+"evil-icons@^1.10.1":
+  "integrity" "sha512-gIBzN6rpvG5om/WAu1rEiE9SgT9mQ00cmYvRb6Cr4ngVaz9Ae8JGeEByMOvrfKvrMhsZzLCNmUJLBJZwjri4bw=="
+  "resolved" "https://registry.npmjs.org/evil-icons/-/evil-icons-1.10.1.tgz"
+  "version" "1.10.1"
+
 "evp_bytestokey@^1.0.0", "evp_bytestokey@^1.0.3":
   "integrity" "sha512-/f2Go4TognH/KvCISP7OUsHn85hT9nUkxxA9BEWxFn+Oj9o8ZNLm/40hdlgSLyuOimsrTKLUMEorQexp/aPQeA=="
   "resolved" "https://registry.npmjs.org/evp_bytestokey/-/evp_bytestokey-1.0.3.tgz"
@@ -7923,6 +7928,11 @@
   "version" "1.0.0"
   dependencies:
     "object-visit" "^1.0.0"
+
+"material-icons@^0.6.3":
+  "integrity" "sha512-L7YofK4WQR1rDAO/wdn17OzTIbFpXf+pnnFv+utfFY7Wff7wSu/TLL+XgPWnEzd95OuusLLx78XCPzy+SSDk0A=="
+  "resolved" "https://registry.npmjs.org/material-icons/-/material-icons-0.6.3.tgz"
+  "version" "0.6.3"
 
 "md5-file@^3.2.3":
   "integrity" "sha512-3Tkp1piAHaworfcCgH0jKbTvj1jWWFgbvh2cXaNCgHwyTCBxxvD1Y04rmfpvdPm1P4oXMOpm6+2H7sr7v9v8Fw=="

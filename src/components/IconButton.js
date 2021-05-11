@@ -9,7 +9,7 @@ export function IconButton({name, style, onPress}) {
   return (
 
       <TouchableOpacity style= {[styles.container, style]} onPress={onPress}>
-        <Icon name = {name} color={'#16394e'} />
+        <Icon size = {40} name = {name} color={'#16394e'} />
 
       </TouchableOpacity>
 
