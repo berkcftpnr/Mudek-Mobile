@@ -1,13 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useState,useEffect} from 'react';
+import { StyleSheet, Text, View , Alert } from 'react-native';
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
 import { TextButton } from '../components/TextButton';
 import { Error } from '../components/Error';
+import { API} from '../config/config';
 
 export function LoginScreen({navigation}) {
+  const[email,setEmail]= useState("");
+  const[sifre,setSifre]= useState("");
+  const girisYap =()=> {
+    API.post("/api/giris",{
+
+  eMail:email,
+  password:sifre,
+
+}).then((response)=>{
+  if(response.data.message){
+    alert(response.data.message);
+  }else{
+alert(response.data[0].name_m);
+
+  }
+})
+
+}
+
+
   return (
     <View style={styles.container}>
       <Heading style= {styles.title} >Giriş Yap</Heading>
@@ -15,14 +36,16 @@ export function LoginScreen({navigation}) {
       <Input style={styles.input}
       placeholder={'Email'}
       keyboardType= "email-address"
+      onChangeText={text => setEmail(text)}
       />
       <Input style={styles.input}
       placeholder={'Şifre'}
       secureTextEntry
+      onChangeText={text => setSifre(text)}
       />
       <FilledButton title={'Giriş Yap'}
       style={styles.loginButton}
-      onPress ={() => {}}
+      onPress ={ girisYap}
       />
       <FilledButton title={'Üye Ol'}
       style={styles.registerButton}
