@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState,useEffect}  from 'react';
-import { StyleSheet, Text, View, ScrollView ,Image, Picker, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, ScrollView ,Image, Picker} from 'react-native';
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
@@ -18,15 +18,14 @@ export function RegistrationScreen({navigation}) {
   const [sifre, setSifre] = useState("");
   const [sifreTekrar, setSifreTekrar] = useState("");
   const [placeholderr, setPlaceholderr] = useState("");
-  
+
     useEffect(() => {
   AsyncStorage.getItem('name').then((value) =>
          setPlaceholderr(value)
-       );
+       ); 
   }, []);
 
     const kayit =()=> {
-
       if(!email.includes('@') || !email.includes('.'))
     alert("Lütfen geçerli bir e-mail adresi giriniz.");
 
@@ -117,10 +116,9 @@ export function RegistrationScreen({navigation}) {
         <Picker.Item label="Mudek-Yetkilisi" value="6" />
       </Picker>
       <Input style={styles.input}
-      placeholder={placeholderr}
+      placeholder={'Email'}
       keyboardType= "email-address"
       onChangeText={text => setEmail(text)}
-
       />
       <Input style={styles.input}
       placeholder={'İsim'}

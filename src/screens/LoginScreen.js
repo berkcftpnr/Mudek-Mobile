@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View , Alert, AsyncStorage  } from 'react-native';
+import { StyleSheet, Text, View , Alert } from 'react-native';
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
@@ -22,7 +22,7 @@ export function LoginScreen({navigation}) {
     alert(response.data.message);
   }else{
 alert(response.data[0].name_m);
-AsyncStorage.setItem('name', response.data[0].name_m);
+
   }
 })
 
