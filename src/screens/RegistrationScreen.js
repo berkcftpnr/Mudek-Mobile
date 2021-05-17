@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ScrollView ,Image, Picker, AsyncStorage } from 
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
-import { TextButton } from '../components/TextButton';
+import { TextButton } from '../components/TextButton'; 
 import { Error } from '../components/Error';
 import { IconButton } from '../components/IconButton';
 import ANKU_logo from '../images/ANKU_logo.png';
@@ -18,7 +18,7 @@ export function RegistrationScreen({navigation}) {
   const [sifre, setSifre] = useState("");
   const [sifreTekrar, setSifreTekrar] = useState("");
   const [placeholderr, setPlaceholderr] = useState("");
-  
+
     useEffect(() => {
   AsyncStorage.getItem('name').then((value) =>
          setPlaceholderr(value)
