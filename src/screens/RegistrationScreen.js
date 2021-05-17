@@ -18,7 +18,7 @@ export function RegistrationScreen({navigation}) {
   const [sifre, setSifre] = useState("");
   const [sifreTekrar, setSifreTekrar] = useState("");
   const [placeholderr, setPlaceholderr] = useState("");
-
+  
     useEffect(() => {
   AsyncStorage.getItem('name').then((value) =>
          setPlaceholderr(value)
