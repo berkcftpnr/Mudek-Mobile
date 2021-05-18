@@ -13,6 +13,7 @@ import MUDEK_logo from '../images/MUDEK.png';
 export function LoginScreen({navigation}) {
   const[email,setEmail]= useState("");
   const[sifre,setSifre]= useState("");
+
   const girisYap =()=> {
     API.post("/api/giris",{
 
@@ -25,8 +26,8 @@ export function LoginScreen({navigation}) {
   }else{
 
     AsyncStorage.setItem("name",response.data[0].name_m)
-    AsyncStorage.setItem("id",response.data[0].user_id)
-    AsyncStorage.setItem("level",response.data[0].authlevel_m)
+    AsyncStorage.setItem("id",response.data[0].user_id.toString())
+    AsyncStorage.setItem("level",response.data[0].authlevel_m.toString())
     AsyncStorage.setItem("isDocPage","false")
 
     switch (response.data[0].authlevel_m) {
