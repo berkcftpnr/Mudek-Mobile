@@ -3,6 +3,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {LoginScreen} from '../screens/LoginScreen';
 import {RegistrationScreen} from '../screens/RegistrationScreen';
+import {AsistantScreen} from '../screens/AsistantScreen';
+import {InstructorScreen} from '../screens/InstructorScreen';
+import {MudekScreen} from '../screens/MudekScreen';
+import {Pending} from '../screens/Pending';
+import {Pending2} from '../screens/Pending2';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -20,6 +25,11 @@ export function AuthStackNavigator() {
       >
         <AuthStack.Screen name={'Login'} component={LoginScreen} />
         <AuthStack.Screen name={'Registration'} component={RegistrationScreen} />
+          <AuthStack.Screen name={'Asistant'} component={AsistantScreen} />
+          <AuthStack.Screen name={'Instructor'} component={InstructorScreen} />
+          <AuthStack.Screen name={'Mudek'} component={MudekScreen} />
+          <AuthStack.Screen name={'Pending'} component={Pending} />
+          <AuthStack.Screen name={'Pending2'} component={Pending2} />
       </AuthStack.Navigator>
 
 

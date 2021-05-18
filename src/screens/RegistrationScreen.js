@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState,useEffect}  from 'react';
-import { StyleSheet, Text, View, ScrollView ,Image, Picker, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, ScrollView ,Image, Picker } from 'react-native';
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
-import { TextButton } from '../components/TextButton'; 
+import { TextButton } from '../components/TextButton';
 import { Error } from '../components/Error';
 import { IconButton } from '../components/IconButton';
 import ANKU_logo from '../images/ANKU_logo.png';
@@ -17,13 +17,8 @@ export function RegistrationScreen({navigation}) {
   const [isim, setisim] = useState("");
   const [sifre, setSifre] = useState("");
   const [sifreTekrar, setSifreTekrar] = useState("");
-  const [placeholderr, setPlaceholderr] = useState("");
 
-    useEffect(() => {
-  AsyncStorage.getItem('name').then((value) =>
-         setPlaceholderr(value)
-       );
-  }, []);
+
 
     const kayit =()=> {
 
@@ -117,7 +112,7 @@ export function RegistrationScreen({navigation}) {
         <Picker.Item label="Mudek-Yetkilisi" value="6" />
       </Picker>
       <Input style={styles.input}
-      placeholder={placeholderr}
+      placeholder={"E-mail"}
       keyboardType= "email-address"
       onChangeText={text => setEmail(text)}
 
