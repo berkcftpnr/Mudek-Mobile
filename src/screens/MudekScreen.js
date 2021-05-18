@@ -37,7 +37,18 @@ export function MudekScreen({navigation}) {
 
           <Picker style={styles.rol_secimi}
             selectedValue={seciliDonem}
-            style={{ height: 50, width: 150 }}
+            style={{ height: 50, width: 300 }}
+            onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
+          >
+          {donemler.map((val)=>
+                <Picker.Item label={val.name} value={val.semester_id} key={val.semester_id}/>
+              )}
+
+          </Picker>
+
+          <Picker style={styles.rol_secimi}
+            selectedValue={seciliDonem}
+            style={{ height: 50, width: 300 }}
             onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
           >
           {donemler.map((val)=>

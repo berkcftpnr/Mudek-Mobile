@@ -69,12 +69,14 @@ export function LoginScreen({navigation}) {
 
   return (
     <View style={styles.container}>
+    <View style={styles.rowContainer}>
     <Image style={styles.ANKU_logo}
           source={ANKU_logo}
       />
       <Image style={styles.MUDEK_logo}
             source={MUDEK_logo}
         />
+      </View>
       <Heading style= {styles.title} >Giriş Yap</Heading>
       <Error error={''} />
       <Input style={styles.input}
@@ -129,12 +131,19 @@ const styles = StyleSheet.create({
   },ANKU_logo: {
     alignContent:'flex-start',
     height:50,
-    width:50
+    width:50,
+    marginHorizontal: 5, 
   },
   MUDEK_logo: {
     alignContent:'flex-end',
     height:50,
-    width:150
+    width:150,
+    marginHorizontal: 5,
+  },
+
+  rowContainer: {
+      flexDirection: 'row',
+      margin: 5,
   },
 
 });

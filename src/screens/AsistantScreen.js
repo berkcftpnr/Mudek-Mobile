@@ -37,7 +37,7 @@ export function AsistantScreen({navigation}) {
 
           <Picker style={styles.rol_secimi}
             selectedValue={seciliDonem}
-            style={{ height: 50, width: 150 }}
+            style={{ height: 50, width: 300 }}
             onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
           >
           {donemler.map((val)=>
@@ -48,7 +48,7 @@ export function AsistantScreen({navigation}) {
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
-            alert("Bölüm Dökümanları Sayfası")
+            navigation.navigate('DepDocs');
           }}
           />
       <StatusBar style="auto" />
