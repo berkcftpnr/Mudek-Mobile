@@ -13,18 +13,36 @@ import MUDEK_logo from '../images/MUDEK.png';
 export function InstructorScreen({navigation}) {
     const[kullanıcıAdi,setKullaniciAdi]= useState("");
     const[seciliDonem,setSeciliDonem]= useState("");
+    const[kullaniciId,setKullaniciId]= useState("");
     const[donemler,setDonemler]=useState([]);
-
+    const[dersler,setDersler]=useState([]);
     React.useEffect(() => {
     AsyncStorage.getItem('name').then((value)=>{
       setKullaniciAdi(value)
+
+    })
+    AsyncStorage.getItem('id').then((value)=>{
+      setKullaniciId(value)
 
     })
 
     API.get("/api/donemGoruntule").then((response) => {
     setDonemler( response.data );
 
+    API.post("/api/dersGoruntuleAnaSayfa",{
+        donem_id: response.data[0].semester_id,
+        egitmen_id:kullaniciId,
+
+    }).then((response)=>{
+      setDersler(response.data)
+
+    })
+
 });
+
+
+
+
 
   }, []);
 
@@ -33,8 +51,11 @@ export function InstructorScreen({navigation}) {
     <Image style={styles.ANKU_logo}
           source={ANKU_logo}
       />
-          <Heading style= {styles.title} >Hoşgeldiniz {kullanıcıAdi} egitmen</Heading>
-
+      <View style={styles.lineStyle}>
+      </View>
+          <Heading style= {styles.title} >Hoşgeldiniz {kullanıcıAdi}</Heading>
+          <View style={styles.lineStyle}>
+          </View>
           <Picker style={styles.rol_secimi}
             selectedValue={seciliDonem}
             style={{ height: 50, width: 300 }}
@@ -45,18 +66,20 @@ export function InstructorScreen({navigation}) {
               )}
 
           </Picker>
-
+          <View style={styles.lineStyle}>
+          </View>
           <Picker style={styles.rol_secimi}
             selectedValue={seciliDonem}
             style={{ height: 50, width: 300 }}
             onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
           >
-          {donemler.map((val)=>
-                <Picker.Item label={val.name} value={val.semester_id} key={val.semester_id}/>
+          {dersler.map((val)=>
+                <Picker.Item label={val.lecture_code + "  "+ val.lecture_name} value={val.lecture_id} key={val.lecture_id}/>
               )}
 
           </Picker>
-
+          <View style={styles.lineStyle}>
+          </View>
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
@@ -78,7 +101,9 @@ const styles = StyleSheet.create({
     paddingTop: 60,
   },
   title: {
-    marginBottom: 48,
+    marginBottom: 15,
+      marginTop:15,
+    textAlign:'center',
   },
   input: {
       marginVertical: 8,
@@ -90,9 +115,16 @@ const styles = StyleSheet.create({
     marginVertical:8
   },
   secButton: {
-      marginVertical: 0,
+    marginVertical: 20,
+    width:'22%'
 
   },
 
+    lineStyle:{
+          borderWidth: 0.5,
+          borderColor:'#16394e',
+          margin:10,
+          width: '100%',
+     },
 
 });

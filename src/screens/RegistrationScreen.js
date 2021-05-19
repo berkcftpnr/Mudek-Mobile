@@ -87,17 +87,20 @@ export function RegistrationScreen({navigation}) {
 
   return (
     <View style={styles.container}>
+
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
       navigation.navigate('Login');
-}}/>
+    }}/>
 
 <View style={styles.rowContainer}>
-<Image style={styles.ANKU_logo}
-      source={ANKU_logo}
-  />
-  <Image style={styles.MUDEK_logo}
-        source={MUDEK_logo}
-    />
+
+    <Image style={styles.ANKU_logo}
+          source={ANKU_logo}
+      />
+      <Image style={styles.MUDEK_logo}
+            source={MUDEK_logo}
+        />
+
     </View>
     <Heading style= {styles.title} >Üye Ol</Heading>
       <ScrollView style={styles.scrollView} >
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
     padding: 0,
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingTop: 120,
+    paddingTop: 60,
     paddingBottom: 0,
 
   },
@@ -189,13 +192,13 @@ const styles = StyleSheet.create({
     alignContent:'flex-start',
     height:50,
     width:50,
-    marginHorizontal: 5,
+    marginHorizontal:5,
   },
   MUDEK_logo: {
     alignContent:'flex-end',
     height:50,
     width:150,
-    marginHorizontal: 5,
+    marginHorizontal:5,
   },
   rol_secimi: {
     marginVertical:8,

@@ -15,12 +15,14 @@ export function LoginScreen({navigation}) {
   const[sifre,setSifre]= useState("");
 
   const girisYap =()=> {
+
     API.post("/api/giris",{
 
   eMail:email,
   password:sifre,
 
 }).then((response)=>{
+
   if(response.data.message){
     alert(response.data.message);
   }else{
@@ -79,6 +81,7 @@ export function LoginScreen({navigation}) {
       </View>
       <Heading style= {styles.title} >Giriş Yap</Heading>
       <Error error={''} />
+
       <Input style={styles.input}
       placeholder={'Email'}
       keyboardType= "email-address"
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
     alignContent:'flex-start',
     height:50,
     width:50,
-    marginHorizontal: 5, 
+    marginHorizontal: 5,
   },
   MUDEK_logo: {
     alignContent:'flex-end',

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View , Alert, AsyncStorage ,Image , Picker } from 're
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
-
+import { IconButton } from '../components/IconButton';
 import { Error } from '../components/Error';
 import { API} from '../config/config';
 import ANKU_logo from '../images/ANKU_logo.png';
@@ -30,21 +30,30 @@ export function AsistantScreen({navigation}) {
 
   return (
     <View style={styles.container}>
+    <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
+      navigation.navigate('Login');//sessionlar eklenecek
+}}/>
+
     <Image style={styles.ANKU_logo}
           source={ANKU_logo}
       />
-          <Heading style= {styles.title} >Hoşgeldiniz {kullanıcıAdi} asistan</Heading>
-
+      <View style={styles.lineStyle}>
+      </View>
+          <Heading style= {styles.title} >Hoşgeldiniz {kullanıcıAdi}</Heading>
+          <View style={styles.lineStyle}>
+          </View>
           <Picker style={styles.rol_secimi}
             selectedValue={seciliDonem}
             style={{ height: 50, width: 300 }}
             onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
           >
           {donemler.map((val)=>
-                <Picker.Item label={val.name} value={val.semester_id} key={val.semester_id}/>
+                <Picker.Item label={val.name} value={val.semester_id} key={val.semester_id}   />
               )}
 
           </Picker>
+          <View style={styles.lineStyle}>
+          </View>
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
@@ -66,7 +75,9 @@ const styles = StyleSheet.create({
     paddingTop: 60,
   },
   title: {
-    marginBottom: 48,
+    marginBottom: 30,
+      marginTop:30,
+    textAlign:'center',
   },
   input: {
       marginVertical: 8,
@@ -75,12 +86,26 @@ const styles = StyleSheet.create({
     height:50,
     width:50
   },rol_secimi: {
-    marginVertical:8
-  },
-  secButton: {
-      marginVertical: 0,
+    marginVertical:18,
 
   },
+  secButton: {
+      marginVertical: 20,
+      width:'22%'
+
+  },closeIcon: {
+    position: 'absolute',
+    top: 60,
+    right: 20,
+
+
+  },
+    lineStyle:{
+          borderWidth: 0.5,
+          borderColor:'#16394e',
+          margin:10,
+          width: '100%',
+     },
 
 
 });
