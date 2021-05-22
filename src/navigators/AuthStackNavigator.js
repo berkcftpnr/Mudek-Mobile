@@ -9,6 +9,9 @@ import {MudekScreen} from '../screens/MudekScreen';
 import {Pending} from '../screens/Pending';
 import {Pending2} from '../screens/Pending2';
 import {DepDocs} from '../screens/DepDocs';
+import {DepDocsEkle} from '../screens/DepDocsEkle';
+import {DersiciEkle} from '../screens/DersiciEkle';
+import {SinavDocEkle} from '../screens/SinavDocEkle';
 import {Lecture} from '../screens/Lecture';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
@@ -34,6 +37,9 @@ export function AuthStackNavigator() {
           <AuthStack.Screen name={'Pending2'} component={Pending2} />
           <AuthStack.Screen name={'DepDocs'} component={DepDocs} />
           <AuthStack.Screen name={'Lecture'} component={Lecture} />
+          <AuthStack.Screen name={'DepDocsEkle'} component={DepDocsEkle} />
+          <AuthStack.Screen name={'DersiciEkle'} component={DersiciEkle} />
+          <AuthStack.Screen name={'SinavDocEkle'} component={SinavDocEkle} />
       </AuthStack.Navigator>
 
 

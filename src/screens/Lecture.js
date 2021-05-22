@@ -24,143 +24,261 @@ export function Lecture({navigation}) {
       <View style={styles.lineStyle}>
       </View>
 
+      <Heading style= {styles.titletop} >Bilgisayar Programlama </Heading>
+      <Heading style= {styles.titletop} >2020 - 2021 Güz Dönemi </Heading>
+
+      <View style={styles.lineStyle} >
+      </View>
+
       <ScrollView style= {styles.scrollView}>
 
           <Heading style= {styles.title} >Ders içi Dökümanları </Heading>
 
-
-
           <View style={styles.lineStyle} >
           </View>
+          <View style={styles.containerAcikmavi}>
+            <ScrollView horizontal={true}>
+              <TouchableOpacity
+              style={styles.docButton}
+              onPress ={() => {
+              }}
+              >
+                <View style={styles.containerKoyumavi}>
+                  <Image style={styles.pdfImage}
+                  source={PDF_icon}
+                  />
+                  <View style={styles.lineStyleDoc}>
+                  </View>
+                  <Text style={{color:'#f5f5f5',fontSize:15}}>
+                    Evrak Adı
+                  </Text>
+                </View>
+              </TouchableOpacity>
 
-      <View style={styles.containerAcikmavi}>
-        <ScrollView horizontal={true}>
+            <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
+            </View>
 
+              <TouchableOpacity
+              style={styles.docButton}
+              onPress ={() => {
+              }}
+              >
+                <View style={styles.containerKoyumavi}>
+                  <Image style={styles.pdfImage}
+                  source={PDF_icon}
+                  />
+                  <View style={styles.lineStyleDoc}>
+                  </View>
+                  <Text style={{color:'#f5f5f5',fontSize:15}}>
+                    Evrak Adı
+                  </Text>
+                </View>
+              </TouchableOpacity>
 
-    <TouchableOpacity
-      style={styles.docButton}
-      onPress ={() => {
-      }}
-      >
-      <View style={styles.containerKoyumavi}>
+            <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
+            </View>
 
+              <TouchableOpacity
+              style={styles.docButton}
+              onPress ={() => {
+                navigation.navigate('DersiciEkle');
+              }}
+              >
+                <View style={styles.containerKoyumaviEkle}>
+                  <Image style={styles.pdfImage}
+                  source={EKLE_img}
+                  />
+                </View>
 
-          <Image style={styles.pdfImage}
-                source={PDF_icon}
-            />
-
-        <View style={styles.lineStyleDoc}>
-        </View>
-
-        <Text style={{color:'#f5f5f5',fontSize:15}}>
-          Evrak Adı
-        </Text>
-      </View>
-
-    </TouchableOpacity>
-    <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-
-
-    </View>
-    <TouchableOpacity
-      style={styles.docButton}
-      onPress ={() => {
-      }}
-      >
-      <View style={styles.containerKoyumavi}>
-
-
-          <Image style={styles.pdfImage}
-                source={PDF_icon}
-            />
-
-        <View style={styles.lineStyleDoc}>
-        </View>
-
-        <Text style={{color:'#f5f5f5',fontSize:15}}>
-          Evrak Adı
-        </Text>
-      </View>
-
-    </TouchableOpacity>
-
-
-    <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-
-
-    </View>
-    <TouchableOpacity
-      style={styles.docButton}
-      onPress ={() => {
-      }}
-      >
-      <View style={styles.containerKoyumaviEkle}>
-
-
-          <Image style={styles.pdfImage}
-                source={EKLE_img}
-            />
-
-
-
-
-      </View>
-
-    </TouchableOpacity>
-
-
-
-
-
-
-
-
-
-        </ScrollView>
-      </View>
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
 
       <Heading style= {styles.title} >Sınav Dökümanları </Heading>
 
-
-      <View style={styles.lineStyle}>
+      <View style={styles.lineStyle} >
       </View>
-
       <View style={styles.containerAcikmavi}>
-      <View style={styles.containerKoyumavi}>
-      </View>
-      </View>
+        <ScrollView horizontal={true}>
+          <TouchableOpacity
+          style={styles.docButton}
+          onPress ={() => {
+          }}
+          >
+            <View style={styles.containerKoyumavi}>
+              <Image style={styles.pdfImage}
+              source={PDF_icon}
+              />
+              <View style={styles.lineStyleDoc}>
+              </View>
+              <Text style={{color:'#f5f5f5',fontSize:15}}>
+                Evrak Adı
+              </Text>
+            </View>
+          </TouchableOpacity>
 
+        <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
+        </View>
+
+          <TouchableOpacity
+          style={styles.docButton}
+          onPress ={() => {
+          }}
+          >
+            <View style={styles.containerKoyumavi}>
+              <Image style={styles.pdfImage}
+              source={PDF_icon}
+              />
+              <View style={styles.lineStyleDoc}>
+              </View>
+              <Text style={{color:'#f5f5f5',fontSize:15}}>
+                Evrak Adı
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+        <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
+        </View>
+
+          <TouchableOpacity
+          style={styles.docButton}
+          onPress ={() => {
+            navigation.navigate('SinavDocEkle');
+          }}
+          >
+            <View style={styles.containerKoyumaviEkle}>
+              <Image style={styles.pdfImage}
+              source={EKLE_img}
+              />
+            </View>
+
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
 
       <Heading style= {styles.title} >Ders Öğrenme Kazanımları </Heading>
 
-      <View style={styles.lineStyle}>
+      <View style={styles.lineStyle} >
+      </View>
+      <View style={styles.containerAcikmavi}>
+        <ScrollView horizontal={true}>
+          <TouchableOpacity
+          style={styles.fotoButton}
+          onPress ={() => {
+          }}
+          >
+          <View style={styles.containerKoyumaviFoto}>
+            <Heading style= {styles.titleKazanim}>
+              Kazanım 1
+            </Heading>
+          </View>
+        </TouchableOpacity>
+
+      <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
       </View>
 
-  <View style={styles.containerAcikmavi}>
-  <View style={styles.containerKoyumavi}>
-  </View>
-  </View>
+        <TouchableOpacity
+        style={styles.fotoButton}
+        onPress ={() => {
+        }}
+        >
+          <View style={styles.containerKoyumaviFoto}>
+            <Heading style= {styles.titleKazanim}>
+              Kazanım 2
+            </Heading>
+          </View>
+        </TouchableOpacity>
+
+      <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
+      </View>
+
+        <TouchableOpacity
+        style={styles.fotoButton}
+        onPress ={() => {
+        }}
+        >
+          <View style={styles.containerKoyumaviEkleFoto}>
+            <Image style={styles.pdfImage}
+            source={EKLE_img}
+            />
+          </View>
+
+
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
 
 
   <Heading style= {styles.title} >Ölçme ve Değerlendirme Evrakları </Heading>
 
+  <View style={styles.lineStyle} >
+  </View>
+  <View style={styles.containerAcikmavi}>
+    <ScrollView horizontal={true}>
+      <TouchableOpacity
+      style={styles.docButton}
+      onPress ={() => {
+      }}
+      >
+        <View style={styles.containerKoyumavi}>
+          <Image style={styles.pdfImage}
+          source={PDF_icon}
+          />
+          <View style={styles.lineStyleDoc}>
+          </View>
+          <Text style={{color:'#f5f5f5',fontSize:15}}>
+            Evrak Adı
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+    <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
+    </View>
+
+      <TouchableOpacity
+      style={styles.docButton}
+      onPress ={() => {
+      }}
+      >
+        <View style={styles.containerKoyumavi}>
+          <Image style={styles.pdfImage}
+          source={PDF_icon}
+          />
+          <View style={styles.lineStyleDoc}>
+          </View>
+          <Text style={{color:'#f5f5f5',fontSize:15}}>
+            Evrak Adı
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+    <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
+    </View>
+
+      <TouchableOpacity
+      style={styles.docButton}
+      onPress ={() => {
+      }}
+      >
+        <View style={styles.containerKoyumaviEkle}>
+          <Image style={styles.pdfImage}
+          source={EKLE_img}
+          />
+        </View>
+
+      </TouchableOpacity>
+    </ScrollView>
+  </View>
+
   <View style={styles.lineStyle}>
   </View>
 
-<View style={styles.containerAcikmavi}>
-<View style={styles.containerKoyumavi}>
-</View>
-</View>
-<View style={styles.lineStyle}>
-</View>
+  <StatusBar style="auto" />
+  </ScrollView>
+  <View style={styles.lineStyle}>
+  </View>
 
-
-      <StatusBar style="auto" />
-      </ScrollView>
-      <View style={styles.lineStyle}>
-      </View>
-
-    </View>
+</View>
 
 
   );
@@ -179,7 +297,22 @@ const styles = StyleSheet.create({
       textAlign:'center',
       fontSize:21
   },
-ANKU_logo: {
+
+  titleKazanim: {
+      marginTop: 45,
+      textAlign:'center',
+      fontSize:21,
+      color: 'white',
+  },
+
+  titletop: {
+      marginBottom: 5,
+      marginTop: 5,
+      textAlign:'center',
+      fontSize:21
+  },
+
+  ANKU_logo: {
     alignContent:'flex-start',
     height:50,
     width:50
@@ -207,6 +340,7 @@ ANKU_logo: {
     width: '100%',
     borderRadius:5
   },
+
   containerKoyumaviEkle: {
     flex: 1,
     padding: 20,
@@ -217,50 +351,72 @@ ANKU_logo: {
     borderRadius:5
   },
 
+  containerKoyumaviFoto: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#16394e',
+    alignItems: 'center',
+    paddingTop: 20,
+    width: '100%',
+    borderRadius:5
+  },
+
+  containerKoyumaviEkleFoto: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#16394e',
+    alignItems: 'center',
+    paddingTop: 40,
+    width: '100%',
+    borderRadius:5
+  },
 
   lineStyle:{
-        borderWidth: 0.5,
-        borderColor:'#16394e',
-        margin:10,
-        width: '100%',
-   },
+    borderWidth: 0.5,
+    borderColor:'#16394e',
+    margin:10,
+    width: '100%',
+  },
 
-   scrollView: {
-     padding:20,
-     backgroundColor: '#fff',
-     width: '100%',
+  scrollView: {
+    paddingTop: 10,
+    padding: 20,
+    backgroundColor: '#fff',
+    width: '100%',
+  },
 
-   },
-   lineStyleDoc:{
-         borderWidth: 0.5,
-         borderColor:'white',
-         marginTop:8,
-         marginBottom:2,
-         width: '150%',
+  lineStyleDoc:{
+    borderWidth: 0.5,
+    borderColor:'white',
+    marginTop:8,
+    marginBottom:2,
+    width: '150%',
+  },
 
+  pdfImage:{
+    width:60,
+    height:100,
+    marginBottom:10
+  },
 
-    },
-    pdfImage:{
-      width:60,
-      height:100,
-      marginBottom:10
+  docButton:{
 
-     },
-     docButton:{
+  },
 
-     },
-     ekleButton: {
-       marginVertical: 10,
-       width:'15%',
-       height:15,
+  fotoButton:{
+    width: 220,
+  },
 
-     },
+  ekleButton: {
+    marginVertical: 10,
+    width:'15%',
+    height:15,
+  },
 
-       rowContainer: {
-           flexDirection: 'row',
-           margin: 5,
-
-       },
+  rowContainer: {
+    flexDirection: 'row',
+    margin: 5,
+  },
 
 
 });
