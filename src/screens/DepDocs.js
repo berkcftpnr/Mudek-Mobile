@@ -133,6 +133,7 @@ export function DepDocs({navigation}) {
           <TouchableOpacity
           style={styles.fotoButton}
           onPress ={() => {
+            navigation.navigate('FotoEkle');
           }}
           >
             <View style={styles.containerKoyumaviEkleFoto}>

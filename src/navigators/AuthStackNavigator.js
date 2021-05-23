@@ -11,6 +11,7 @@ import {Pending2} from '../screens/Pending2';
 import {DepDocs} from '../screens/DepDocs';
 import {DepDocsEkle} from '../screens/DepDocsEkle';
 import {DersiciEkle} from '../screens/DersiciEkle';
+import {FotoEkle} from '../screens/FotoEkle';
 import {SinavDocEkle} from '../screens/SinavDocEkle';
 import {Lecture} from '../screens/Lecture';
 import 'react-native-gesture-handler';
@@ -40,6 +41,7 @@ export function AuthStackNavigator() {
           <AuthStack.Screen name={'DepDocsEkle'} component={DepDocsEkle} />
           <AuthStack.Screen name={'DersiciEkle'} component={DersiciEkle} />
           <AuthStack.Screen name={'SinavDocEkle'} component={SinavDocEkle} />
+          <AuthStack.Screen name={'FotoEkle'} component={FotoEkle} />
       </AuthStack.Navigator>
 
 
