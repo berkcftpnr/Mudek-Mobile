@@ -30,7 +30,7 @@ export function AsistantScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-    <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
+    <IconButton style={styles.closeIcon} name={'exit-outline'} onPress ={() => {
       navigation.navigate('Login');//sessionlar eklenecek
 }}/>
 

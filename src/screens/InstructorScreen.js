@@ -4,7 +4,7 @@ import { StyleSheet, Text, View , Alert, AsyncStorage ,Image , Picker } from 're
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
-
+import { IconButton } from '../components/IconButton';
 import { Error } from '../components/Error';
 import { API} from '../config/config';
 import ANKU_logo from '../images/ANKU_logo.png';
@@ -51,6 +51,9 @@ export function InstructorScreen({navigation}) {
     <Image style={styles.ANKU_logo}
           source={ANKU_logo}
       />
+      <IconButton style={styles.closeIcon} name={'exit-outline'} onPress ={() => {
+        navigation.navigate('Login');//sessionlar eklenecek
+  }}/>
       <View style={styles.lineStyle}>
       </View>
           <Heading style= {styles.title} >Hoşgeldiniz {kullanıcıAdi}</Heading>
@@ -119,7 +122,11 @@ const styles = StyleSheet.create({
     width:'22%'
 
   },
-
+  closeIcon: {
+    position: 'absolute',
+    top: 60,
+    right: 20,
+  },
     lineStyle:{
           borderWidth: 0.5,
           borderColor:'#16394e',

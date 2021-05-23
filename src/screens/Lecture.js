@@ -6,7 +6,7 @@ import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
 
 import { Error } from '../components/Error';
-
+import { IconHome } from '../components/IconHome';
 import ANKU_logo from '../images/ANKU_logo.png';
 import MUDEK_logo from '../images/MUDEK.png';
 import PDF_icon from '../images/pdf_icon.png';
@@ -21,6 +21,9 @@ export function Lecture({navigation}) {
     <Image style={styles.ANKU_logo}
           source={ANKU_logo}
       />
+      <IconHome style={styles.homeIcon} size = {20} name={'home-outline'} onPress ={() => {
+        navigation.navigate('Instructor');//sessionlar eklenecek
+      }}/>
       <View style={styles.lineStyle}>
       </View>
 
@@ -419,6 +422,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     margin: 5,
   },
+
+  homeIcon: {
+    position: 'absolute',
+    top: 70,
+    right: 25,
+},
 
 
 });

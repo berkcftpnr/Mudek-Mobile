@@ -59,8 +59,8 @@ export function SinavDocEkle({navigation}) {
             <Picker.Item label="Sınav Soruları" value="5" />
             <Picker.Item label="Cevap Anahtarı" value="4" />
             <Picker.Item label="1. Vize" value="6" />
-            <Picker.Item label="2. Vize" value="6" />
-            <Picker.Item label="Final" value="6" />
+            <Picker.Item label="2. Vize" value="7" />
+            <Picker.Item label="Final" value="8" />
           </Picker>
           <View style={styles.lineStyle}>
           </View>
@@ -84,8 +84,6 @@ export function SinavDocEkle({navigation}) {
           numberOfLines = {4}
           placeholder={'Açıklama'}
           />
-          <View style={styles.lineStyle}>
-          </View>
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
@@ -134,6 +132,8 @@ const styles = StyleSheet.create({
 },
     araBaslik: {
       marginHorizontal: 8,
+      fontSize: 20,
+      marginVertical: 8,
   },
     lineStyle:{
           borderWidth: 0.5,
