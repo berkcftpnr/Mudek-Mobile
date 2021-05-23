@@ -11,6 +11,7 @@ import ANKU_logo from '../images/ANKU_logo.png';
 import MUDEK_logo from '../images/MUDEK.png';
 import PDF_icon from '../images/pdf_icon.png';
 import EKLE_img from '../images/ekle_img.png';
+import Fakulte_logo from '../images/fakulte_logo.png';
 export function Lecture({navigation}) {
 
 
@@ -21,14 +22,23 @@ export function Lecture({navigation}) {
     <Image style={styles.ANKU_logo}
           source={ANKU_logo}
       />
+
       <IconHome style={styles.homeIcon} size = {20} name={'home-outline'} onPress ={() => {
         navigation.navigate('Instructor');//sessionlar eklenecek
       }}/>
       <View style={styles.lineStyle}>
       </View>
 
+      <View style={styles.rowContainer} >
+      <Image style={styles.fakulte_logo}
+            source={Fakulte_logo}
+        />
+
       <Heading style= {styles.titletop} >Bilgisayar Programlama </Heading>
+      </View>
       <Heading style= {styles.titletop} >2020 - 2021 Güz Dönemi </Heading>
+
+
 
       <View style={styles.lineStyle} >
       </View>
@@ -300,7 +310,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
       marginTop: 15,
       textAlign:'center',
-      fontSize:21
+      fontSize:21,
   },
 
   titleKazanim: {
@@ -314,13 +324,22 @@ const styles = StyleSheet.create({
       marginBottom: 5,
       marginTop: 5,
       textAlign:'center',
-      fontSize:21
+      fontSize:21,
   },
 
   ANKU_logo: {
     alignContent:'flex-start',
     height:50,
-    width:50
+    width:50,
+  },
+
+  fakulte_logo: {
+    height:50,
+    width:50,
+    position: 'absolute',
+    top: 15,
+    right: 245,
+    marginRight: 5
   },
 
   containerAcikmavi: {
@@ -427,6 +446,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 70,
     right: 25,
+},
+
+rowContainer: {
+    flexDirection: 'row',
+    margin: 5,
 },
 
 

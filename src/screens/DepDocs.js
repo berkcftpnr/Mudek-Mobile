@@ -12,6 +12,7 @@ import ANKU_logo from '../images/ANKU_logo.png';
 import MUDEK_logo from '../images/MUDEK.png';
 import PDF_icon from '../images/pdf_icon.png';
 import EKLE_img from '../images/ekle_img.png';
+import Fakulte_logo from '../images/fakulte_logo.png';
 
 
 export function DepDocs({navigation}) {
@@ -30,7 +31,13 @@ export function DepDocs({navigation}) {
     <View style={styles.lineStyle}>
     </View>
 
+    <View style={styles.rowContainer} >
+    <Image style={styles.fakulte_logo}
+          source={Fakulte_logo}
+      />
+
     <Heading style= {styles.titletop} >2020 - 2021 Güz Dönemi </Heading>
+    </View>
 
     <View style={styles.lineStyle} >
     </View>
@@ -293,6 +300,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 70,
     right: 25,
+},
+
+fakulte_logo: {
+  height:50,
+  width:50,
+  position: 'absolute',
+  top: -5,
+  right: 245,
+  marginRight: 5
 },
 
 

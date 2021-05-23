@@ -10,6 +10,7 @@ import { API} from '../config/config';
 import ANKU_logo from '../images/ANKU_logo.png';
 import MUDEK_logo from '../images/MUDEK.png';
 
+
 export function InstructorScreen({navigation}) {
     const[kullanıcıAdi,setKullaniciAdi]= useState("");
     const[seciliDonem,setSeciliDonem]= useState("");
@@ -39,10 +40,6 @@ export function InstructorScreen({navigation}) {
     })
 
 });
-
-
-
-
 
   }, []);
 
