@@ -15,6 +15,8 @@ import {SinavDocEkle} from './src/screens/SinavDocEkle';
 import {FotoEkle} from './src/screens/FotoEkle';
 import {AnketEkle} from './src/screens/AnketEkle';
 import {KazanimEkle} from './src/screens/KazanimEkle';
+import {SifremiUnuttum} from './src/screens/SifremiUnuttum';
+import {Contact} from './src/screens/Contact';
 import {Lecture} from './src/screens/Lecture';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';

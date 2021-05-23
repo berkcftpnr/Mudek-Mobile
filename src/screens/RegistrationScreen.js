@@ -143,7 +143,9 @@ export function RegistrationScreen({navigation}) {
       />
       <FilledButton title={'İletişim'}
       style={styles.registerButton}
-      onPress ={() => {}}
+      onPress ={() => {
+        navigation.navigate('Contact');
+      }}
       />
 
       <StatusBar style="auto" />

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View , Alert, AsyncStorage ,Image , Picker } from 'react-native';
+import { StyleSheet, Text, View , Alert, AsyncStorage ,Image , Picker, ScrollView } from 'react-native';
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
@@ -14,6 +14,8 @@ export function SinavDocEkle({navigation}) {
     const[kullanıcıAdi,setKullaniciAdi]= useState("");
     const[seciliDonem,setSeciliDonem]= useState("");
     const[donemler,setDonemler]=useState([]);
+    const [selectedValueTur, setSelectedValueTur] = useState("Sınav Soruları");
+    const [selectedValueDerece, setSelectedValueDerece] = useState("Yüksek");
 
     React.useEffect(() => {
     AsyncStorage.getItem('name').then((value)=>{
@@ -39,12 +41,44 @@ export function SinavDocEkle({navigation}) {
       />
       <View style={styles.lineStyle}>
       </View>
-          <Heading style= {styles.title} >Sınav Dökümanı Ekleyiniz</Heading>
+          <Heading style= {styles.title} >Ders İçi Döküman Ekleyiniz</Heading>
           <View style={styles.lineStyle}>
           </View>
+          <ScrollView style= {styles.scrollView}>
           <Input style={styles.input}
-          placeholder={'Başlık'}
+          placeholder={'Evrak Adı'}
           />
+          <Text style={styles.araBaslik}>Sınav Türü Seçiniz</Text>
+          <View style={styles.lineStyle}>
+          </View>
+          <Picker style={styles.rol_secimi}
+            selectedValue={selectedValueTur}
+            style={{ height: 50, width: 300 }}
+            onValueChange={(itemValue, itemIndex) => setSelectedValueTur(itemValue)}
+          >
+            <Picker.Item label="Sınav Soruları" value="5" />
+            <Picker.Item label="Cevap Anahtarı" value="4" />
+            <Picker.Item label="1. Vize" value="6" />
+            <Picker.Item label="2. Vize" value="6" />
+            <Picker.Item label="Final" value="6" />
+          </Picker>
+          <View style={styles.lineStyle}>
+          </View>
+          <Text style={styles.araBaslik}>Sınav Derecesi Seçiniz</Text>
+          <View style={styles.lineStyle}>
+          </View>
+          <Picker style={styles.rol_secimi}
+            selectedValue={selectedValueDerece}
+            style={{ height: 50, width: 300 }}
+            onValueChange={(itemValue, itemIndex) => setSelectedValueDerece(itemValue)}
+          >
+            <Picker.Item label="En Yüksek" value="5" />
+            <Picker.Item label="Orta" value="4" />
+            <Picker.Item label="En Düşük" value="6" />
+          </Picker>
+          <View style={styles.lineStyle}>
+          </View>
+
           <Input style={styles.input}
           multiline = {true}
           numberOfLines = {4}
@@ -59,7 +93,7 @@ export function SinavDocEkle({navigation}) {
           }}
           />
       <StatusBar style="auto" />
-
+      </ScrollView>
     </View>
   );
 }
@@ -89,6 +123,7 @@ const styles = StyleSheet.create({
   },
   secButton: {
       marginVertical: 20,
+      marginHorizontal: 130,
       width:'22%'
 
   },closeIcon: {
@@ -96,7 +131,9 @@ const styles = StyleSheet.create({
     top: 60,
     right: 20,
 
-
+},
+    araBaslik: {
+      marginHorizontal: 8,
   },
     lineStyle:{
           borderWidth: 0.5,
@@ -105,5 +142,11 @@ const styles = StyleSheet.create({
           width: '100%',
      },
 
+     scrollView: {
+       paddingTop: 10,
+       padding:20,
+       backgroundColor: '#fff',
+       width: '100%',
+     },
 
 });

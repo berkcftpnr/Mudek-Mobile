@@ -102,7 +102,11 @@ export function LoginScreen({navigation}) {
         navigation.navigate('Registration');
       }}
       />
-      <TextButton title={'Şifremi Unuttum'} onPress={() => {}} />
+      <TextButton title={'Şifremi Unuttum'}
+      onPress ={() => {
+        navigation.navigate('SifremiUnuttum');
+      }}
+      />
 
 
       <StatusBar style="auto" />

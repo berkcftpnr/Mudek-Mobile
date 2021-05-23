@@ -15,6 +15,8 @@ import {FotoEkle} from '../screens/FotoEkle';
 import {AnketEkle} from '../screens/AnketEkle';
 import {KazanimEkle} from '../screens/KazanimEkle';
 import {SinavDocEkle} from '../screens/SinavDocEkle';
+import {SifremiUnuttum} from '../screens/SifremiUnuttum';
+import {Contact} from '../screens/Contact';
 import {Lecture} from '../screens/Lecture';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
@@ -46,6 +48,8 @@ export function AuthStackNavigator() {
           <AuthStack.Screen name={'FotoEkle'} component={FotoEkle} />
           <AuthStack.Screen name={'AnketEkle'} component={AnketEkle} />
           <AuthStack.Screen name={'KazanimEkle'} component={KazanimEkle} />
+          <AuthStack.Screen name={'SifremiUnuttum'} component={SifremiUnuttum} />
+          <AuthStack.Screen name={'Contact'} component={Contact} />
       </AuthStack.Navigator>
 
 

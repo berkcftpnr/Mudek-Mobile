@@ -39,7 +39,7 @@ export function DersiciEkle({navigation}) {
       />
       <View style={styles.lineStyle}>
       </View>
-          <Heading style= {styles.title} >Ders İçi Döküman Ekleyiniz</Heading>
+          <Heading style= {styles.title} >Sınav Dökümanı Ekleyiniz</Heading>
           <View style={styles.lineStyle}>
           </View>
           <Input style={styles.input}
