@@ -13,6 +13,8 @@ import {DepDocsEkle} from './src/screens/DepDocsEkle';
 import {DersiciEkle} from './src/screens/DersiciEkle';
 import {SinavDocEkle} from './src/screens/SinavDocEkle';
 import {FotoEkle} from './src/screens/FotoEkle';
+import {AnketEkle} from './src/screens/AnketEkle';
+import {KazanimEkle} from './src/screens/KazanimEkle';
 import {Lecture} from './src/screens/Lecture';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';

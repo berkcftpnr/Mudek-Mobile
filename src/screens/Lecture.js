@@ -195,6 +195,7 @@ export function Lecture({navigation}) {
         <TouchableOpacity
         style={styles.fotoButton}
         onPress ={() => {
+          navigation.navigate('KazanimEkle');
         }}
         >
           <View style={styles.containerKoyumaviEkleFoto}>
@@ -258,6 +259,7 @@ export function Lecture({navigation}) {
       <TouchableOpacity
       style={styles.docButton}
       onPress ={() => {
+        navigation.navigate('AnketEkle');
       }}
       >
         <View style={styles.containerKoyumaviEkle}>

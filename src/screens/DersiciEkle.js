@@ -31,7 +31,7 @@ export function DersiciEkle({navigation}) {
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
-      navigation.navigate('Login');//sessionlar eklenecek
+      navigation.navigate('Lecture');//sessionlar eklenecek
 }}/>
 
     <Image style={styles.ANKU_logo}
@@ -39,25 +39,23 @@ export function DersiciEkle({navigation}) {
       />
       <View style={styles.lineStyle}>
       </View>
-          <Heading style= {styles.title} >Ders İci EKLEME EKRANI {kullanıcıAdi}</Heading>
+          <Heading style= {styles.title} >Ders İçi Döküman Ekleyiniz</Heading>
           <View style={styles.lineStyle}>
           </View>
-          <Picker style={styles.rol_secimi}
-            selectedValue={seciliDonem}
-            style={{ height: 50, width: 300 }}
-            onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
-          >
-          {donemler.map((val)=>
-                <Picker.Item label={val.name} value={val.semester_id} key={val.semester_id}   />
-              )}
-
-          </Picker>
+          <Input style={styles.input}
+          placeholder={'Başlık'}
+          />
+          <Input style={styles.input}
+          multiline = {true}
+          numberOfLines = {4}
+          placeholder={'Açıklama'}
+          />
           <View style={styles.lineStyle}>
           </View>
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
-            navigation.navigate('DepDocs');
+            navigation.navigate('Lecture');
           }}
           />
       <StatusBar style="auto" />

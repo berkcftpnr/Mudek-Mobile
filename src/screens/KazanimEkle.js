@@ -10,7 +10,7 @@ import { API} from '../config/config';
 import ANKU_logo from '../images/ANKU_logo.png';
 import MUDEK_logo from '../images/MUDEK.png';
 
-export function SinavDocEkle({navigation}) {
+export function KazanimEkle({navigation}) {
     const[kullanıcıAdi,setKullaniciAdi]= useState("");
     const[seciliDonem,setSeciliDonem]= useState("");
     const[donemler,setDonemler]=useState([]);
@@ -39,7 +39,7 @@ export function SinavDocEkle({navigation}) {
       />
       <View style={styles.lineStyle}>
       </View>
-          <Heading style= {styles.title} >Sınav Dökümanı Ekleyiniz</Heading>
+          <Heading style= {styles.title} >Ders Öğrenme Kazanımı Ekleyiniz</Heading>
           <View style={styles.lineStyle}>
           </View>
           <Input style={styles.input}
