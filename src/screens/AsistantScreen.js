@@ -31,6 +31,10 @@ export function AsistantScreen({navigation}) {
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'exit-outline'} onPress ={() => {
+      AsyncStorage.removeItem("name")
+      AsyncStorage.removeItem("id")
+      AsyncStorage.removeItem("level")
+      AsyncStorage.removeItem("isDocPage")
       navigation.navigate('Login');//sessionlar eklenecek
 }}/>
 
@@ -57,6 +61,9 @@ export function AsistantScreen({navigation}) {
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
+
+            AsyncStorage.setItem("donemId",seciliDonem.toString());
+            AsyncStorage.setItem("isDocPage","true")
             navigation.navigate('DepDocs');
           }}
           />

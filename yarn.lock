@@ -5424,6 +5424,16 @@
     "fbjs" "1.0.0"
     "fontfaceobserver" "^2.1.0"
 
+"expo-image-picker@^10.1.4":
+  "integrity" "sha512-4U16RteJNWP5mC198fOIK/BgI3ZXRjqwslFK/gUrKiK5QKECXdvPCHrPwbXlo1DRQNhoPvWd+Cnhod0RsDnMkQ=="
+  "resolved" "https://registry.npmjs.org/expo-image-picker/-/expo-image-picker-10.1.4.tgz"
+  "version" "10.1.4"
+  dependencies:
+    "@expo/config-plugins" "^1.0.18"
+    "expo-permissions" "~12.0.1"
+    "unimodules-permissions-interface" "~6.1.0"
+    "uuid" "7.0.2"
+
 "expo-keep-awake@~8.4.0":
   "integrity" "sha512-gozpL5Azfaht/YIMFOHRHjHuJ9KT6hJH4y71Al+/YfQSwHS5sqhoKGPgSxaktqbxRrWVUH9q7wSl3EXRK9bYjA=="
   "resolved" "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-8.4.0.tgz"
@@ -5453,6 +5463,11 @@
   "integrity" "sha512-b6oitd4JmFdQ7DxczZ2WRS9aDyqgVM7lEhy3JyKZ2dbU19C6NyHyLCcwssZgfzOfGnp2owoaWn3KU4zdrF5MIA=="
   "resolved" "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-10.0.0.tgz"
   "version" "10.0.0"
+
+"expo-permissions@~12.0.1":
+  "integrity" "sha512-TtypNPPLG4SdVEKBlrArLLZIyhlhE+3B4dhz2HaY1Mve2rcvKE0C7z/e1WoUVU8+LgcdKoNGwg/wRVeCkxeEhg=="
+  "resolved" "https://registry.npmjs.org/expo-permissions/-/expo-permissions-12.0.1.tgz"
+  "version" "12.0.1"
 
 "expo-pwa@0.0.66":
   "integrity" "sha512-9+Pv5qL/W3PnInyXTYhCQ6ukzo2IFzQEJDss9b6frNvxBJzAJWR7F7dsvIaCOr5WrtMBStf4SVdWvGTdssi+XA=="
@@ -12159,6 +12174,11 @@
   "resolved" "https://registry.yarnpkg.com/unimodules-permissions-interface/-/unimodules-permissions-interface-5.4.0.tgz"
   "version" "5.4.0"
 
+"unimodules-permissions-interface@~6.1.0":
+  "integrity" "sha512-jeJx/y+Vn/Cp1/4su5XJ06UBul83MpXkYEqIOAb2jwaikhmj6tNwko7HpKy9OhfGfrhddCzwtedlro8xxZUk9A=="
+  "resolved" "https://registry.npmjs.org/unimodules-permissions-interface/-/unimodules-permissions-interface-6.1.0.tgz"
+  "version" "6.1.0"
+
 "unimodules-sensors-interface@~5.4.0":
   "integrity" "sha512-QxjP8XiiQ3rnjQE2/oRMweRa262hIxeg2SCAgSVNUSC1sTIC44nZgjsfpFk0omkfUpXi3lqSt0wjZjkSgJ1NeQ=="
   "resolved" "https://registry.yarnpkg.com/unimodules-sensors-interface/-/unimodules-sensors-interface-5.4.0.tgz"
@@ -12402,6 +12422,11 @@
   "integrity" "sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA=="
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-3.3.2.tgz"
   "version" "3.3.2"
+
+"uuid@7.0.2":
+  "integrity" "sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw=="
+  "resolved" "https://registry.npmjs.org/uuid/-/uuid-7.0.2.tgz"
+  "version" "7.0.2"
 
 "valid-url@~1.0.9":
   "integrity" "sha1-HBRHm0DxOXp1eC8RXkCGRHQzogA="

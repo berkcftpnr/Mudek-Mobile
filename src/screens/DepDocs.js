@@ -4,7 +4,7 @@ import { StyleSheet, ScrollView, Text, View , Alert, AsyncStorage ,Image , Picke
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
-
+import { API} from '../config/config';
 import { Error } from '../components/Error';
 import { IconHome } from '../components/IconHome';
 
@@ -16,8 +16,35 @@ import Fakulte_logo from '../images/fakulte_logo.png';
 
 
 export function DepDocs({navigation}) {
+  const[donemAdi,setDonemAdi]= useState("");
+  const[foto,setFoto]=useState([]);
+const[userId,setUserId]= useState("");
+      React.useEffect(() => {
+
+    AsyncStorage.getItem('id').then((valueUser)=>{
+          setUserId(valueUser)
 
 
+  AsyncStorage.getItem('donemId').then((value)=>{
+
+    API.post("/api/asistan/donemGoruntule",{
+      idrequest:value
+  }).then((response) => {
+    setDonemAdi( response.data[0].name);
+
+});
+
+API.post("/api/asistan/fotoGoruntule",{
+    donemID:value,
+    userID:valueUser
+        }).then((response) => {
+
+  setFoto( response.data );
+});
+
+  })
+    })
+  }, []);
 
 
   return (
@@ -36,7 +63,7 @@ export function DepDocs({navigation}) {
           source={Fakulte_logo}
       />
 
-    <Heading style= {styles.titletop} >2020 - 2021 Güz Dönemi </Heading>
+    <Heading style= {styles.titletop} >  {donemAdi} </Heading>
     </View>
 
     <View style={styles.lineStyle} >
@@ -111,33 +138,21 @@ export function DepDocs({navigation}) {
 
       <View style={styles.containerAcikmavi}>
         <ScrollView horizontal={true}>
+
+        {foto.map((val)=>
           <TouchableOpacity
           style={styles.fotoButton}
           onPress ={() => {
           }}
           >
             <View style={styles.containerKoyumaviFoto}>
-              <Image style={styles.pdfImage}
-              source={PDF_icon}
+              <Image style={styles.images}
+              source={{uri:val.path}}
+              key={val.photos_id}
               />
             </View>
           </TouchableOpacity>
-
-        <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-        </View>
-
-          <TouchableOpacity
-          style={styles.fotoButton}
-          onPress ={() => {
-          }}
-          >
-            <View style={styles.containerKoyumaviFoto}>
-              <Image style={styles.pdfImage}
-              source={PDF_icon}
-              />
-            </View>
-          </TouchableOpacity>
-
+)}
         <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
         </View>
 
@@ -187,7 +202,8 @@ const styles = StyleSheet.create({
       marginBottom: 5,
       marginTop: 5,
       textAlign:'center',
-      fontSize:21
+      fontSize:21,
+      marginHorizontal:45
   },
 
   ANKU_logo: {
@@ -307,8 +323,14 @@ fakulte_logo: {
   width:50,
   position: 'absolute',
   top: -5,
-  right: 245,
-  marginRight: 5
+  left:0
+
+
+},
+images:{
+  width:200,
+  height:'100%',
+  marginBottom:10
 },
 
 

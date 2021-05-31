@@ -19,6 +19,7 @@
     "evil-icons": "^1.10.1",
     "expo": "~40.0.0",
     "expo-document-picker": "^9.1.2",
+    "expo-image-picker": "^10.1.4",
     "expo-status-bar": "~1.0.3",
     "material-icons": "^0.6.3",
     "react": "16.13.1",
