@@ -13,7 +13,7 @@ import Placeholder from '../images/placeholder.png';
 //import DocumentPicker from 'react-native-document-picker';
 import * as DocumentPicker from 'expo-document-picker';
 
-export function FotoEkle({navigation}) {
+export function FotoGoruntule({navigation}) {
     const[userId,setUserId]= useState("");
     const[seciliDonem,setSeciliDonem]= useState("");
     const[donem,setDonem]=useState("");
@@ -53,60 +53,9 @@ export function FotoEkle({navigation}) {
     const sec =async ()=>{
 
 
-  const doc=await DocumentPicker.getDocumentAsync()
-
-  let lastIndex = doc.name.lastIndexOf(".");
-    // get the original extension of the file
-  let extension = doc.name.substring(lastIndex);
-  if(extension===".jpg" || extension===".jpeg" || extension ===".png")
-  {setFoto(doc)}
-  else{
-    setFoto(Placeholder)
-
-  }
-
-console.log(doc,"  ",doc.name.length,"  ",extension)
     }
 
       const ekle =async ()=>{
-
-      let formData = new FormData();
-        if(foto!=undefined && foto!=Placeholder){
-          var photo = {
-    uri: foto.uri,
-    type: 'image/jpeg',
-    name: 'photo.jpg',
-};
-     formData.append('file', photo);
-
-//  setUploding(true);
-  let { data } = await API.post('/api/images/single-upload', formData, {
-      onUploadProgress: ({ loaded, total }) => {
-          let progress = ((loaded / total) * 100).toFixed(2);
-        //  setProgress(progress);
-      }
-  });
-
-    //setUplodedImg(data.imagePath);
-
-    API.post("/api/asistan/fotoEkle",{
-
-    userId:userId,
-    path: data.imagePath,
-    donem:donem,
-    name:baslik,
-    explanation:aciklama,
-  }).then((response)=>{
-    if(response.data.message){
-      alert(response.data.message)
-    }})
-
-    //setUploding(false);
-
-  setFoto(Placeholder)
-}else{
-alert("Fotoğraf Seçiniz")
-}
 
 
       }
@@ -129,6 +78,9 @@ alert("Fotoğraf Seçiniz")
           <View style={styles.lineStyle}>
           </View>
           <ScrollView style={styles.scrollView} >
+          <Image style={styles.selected_image}
+                  source={foto}
+              />
           <Input style={styles.input}
           placeholder={'Başlık'}
           maxLength={15}
@@ -143,21 +95,23 @@ alert("Fotoğraf Seçiniz")
           onChangeText={text => setAciklama(text)}
           />
               <View style={styles.rowContainer}>
-          <Image style={styles.selected_image}
-                  source={foto}
+
+              <FilledButton title={'Güncelle'}
+              style={styles.ekleButton}
+              onPress ={ekle}
               />
 
-
-          <FilledButton title={'Seç'}
+          <FilledButton title={'Sil'}
           style={styles.secButton}
           onPress ={sec}
 
           />
+          <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={() => {
+          //sessionlar eklenecek
+
+      }}/>
             </View>
-          <FilledButton title={'Ekle'}
-          style={styles.ekleButton}
-          onPress ={ekle}
-          />
+
 
 
       <StatusBar style="auto" />
@@ -192,10 +146,10 @@ const styles = StyleSheet.create({
   },
   secButton: {
       marginVertical: 40,
-      width:'22%',
-      marginHorizontal:20,
-      height: 80,
-      borderRadius:101
+      width:'32%',
+      marginHorizontal:15,
+      height: 60,
+
 
   },closeIcon: {
     position: 'absolute',
@@ -211,24 +165,32 @@ const styles = StyleSheet.create({
           width: '100%',
      },
      selected_image: {
-       width: 270, height: 170,
-        marginHorizontal:0
+       width: '80%', height: 170,
+      marginHorizontal:'10%'
+
+
 },
 rowContainer: {
     flexDirection: 'row',
     margin: 5,
 },
 ekleButton: {
-      marginVertical: 20,
-      width:'22%',
-      marginHorizontal:150,
-
+      marginVertical: 40,
+      width:'32%',
+      marginHorizontal:15,
+      height:60
 
   },
   scrollView: {
     padding:20,
     backgroundColor: '#fff',
     width: '115%',
+
+  },
+  download_icon: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
 
   },
 

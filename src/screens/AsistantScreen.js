@@ -23,7 +23,7 @@ export function AsistantScreen({navigation}) {
 
     API.get("/api/donemGoruntule").then((response) => {
     setDonemler( response.data );
-
+    setSeciliDonem(response.data[0].semester_id)
 });
 
   }, []);
@@ -53,19 +53,24 @@ export function AsistantScreen({navigation}) {
           >
           {donemler.map((val)=>
                 <Picker.Item label={val.name} value={val.semester_id} key={val.semester_id}   />
-              )}
 
+
+              )}
+            
           </Picker>
           <View style={styles.lineStyle}>
           </View>
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
-
+            if(seciliDonem.length===0){
+              alert("Dönem Seçiniz")
+            }else{
             AsyncStorage.setItem("donemId",seciliDonem.toString());
             AsyncStorage.setItem("isDocPage","true")
             navigation.navigate('DepDocs');
-          }}
+          }
+        }}
           />
       <StatusBar style="auto" />
 

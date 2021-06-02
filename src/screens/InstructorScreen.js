@@ -14,6 +14,7 @@ import MUDEK_logo from '../images/MUDEK.png';
 export function InstructorScreen({navigation}) {
     const[kullanıcıAdi,setKullaniciAdi]= useState("");
     const[seciliDonem,setSeciliDonem]= useState("");
+    const[seciliDers,setSeciliDers]= useState("");
     const[kullaniciId,setKullaniciId]= useState("");
     const[donemler,setDonemler]=useState([]);
     const[dersler,setDersler]=useState([]);
@@ -36,13 +37,24 @@ export function InstructorScreen({navigation}) {
 
     }).then((response)=>{
       setDersler(response.data)
-
+      //setSeciliDers(response.data.[0].lecture_id)
     })
 
 });
 
   }, []);
 
+  function donemDegis (itemValue)  {
+    setSeciliDonem(itemValue)
+    API.post("/api/dersGoruntuleAnaSayfa",{
+        donem_id: itemValue,
+        egitmen_id:kullaniciId,
+
+    }).then((response)=>{
+      setDersler(response.data)
+      //setSeciliDers(response.data.[0].lecture_id)
+    })
+}
   return (
     <View style={styles.container}>
     <Image style={styles.ANKU_logo}
@@ -59,7 +71,8 @@ export function InstructorScreen({navigation}) {
           <Picker style={styles.rol_secimi}
             selectedValue={seciliDonem}
             style={{ height: 50, width: 300 }}
-            onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
+            onValueChange={(itemValue, itemIndex) => donemDegis(itemValue)
+              }
           >
           {donemler.map((val)=>
                 <Picker.Item label={val.name} value={val.semester_id} key={val.semester_id}/>
@@ -69,9 +82,9 @@ export function InstructorScreen({navigation}) {
           <View style={styles.lineStyle}>
           </View>
           <Picker style={styles.rol_secimi}
-            selectedValue={seciliDonem}
+            selectedValue={seciliDers}
             style={{ height: 50, width: 300 }}
-            onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
+            onValueChange={(itemValue, itemIndex) => setSeciliDers(itemValue)}
           >
           {dersler.map((val)=>
                 <Picker.Item label={val.lecture_code + "  "+ val.lecture_name} value={val.lecture_id} key={val.lecture_id}/>
@@ -83,7 +96,15 @@ export function InstructorScreen({navigation}) {
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
+            if(seciliDonem.length===0){
+              alert("DÖNEM SEÇİLMEDİ")
+            }else if(seciliDers.length===0){
+              alert("DERS SEÇİLMEDİ")
+}           else{
             navigation.navigate('Lecture');
+
+
+}
           }}
           />
       <StatusBar style="auto" />

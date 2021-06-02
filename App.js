@@ -18,6 +18,8 @@ import {KazanimEkle} from './src/screens/KazanimEkle';
 import {SifremiUnuttum} from './src/screens/SifremiUnuttum';
 import {Contact} from './src/screens/Contact';
 import {Lecture} from './src/screens/Lecture';
+import {FotoGoruntule} from './src/screens/FotoGoruntule';
+import {DepDocsGoruntule} from './src/screens/DepDocsGoruntule';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';

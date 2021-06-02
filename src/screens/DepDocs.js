@@ -54,6 +54,7 @@ API.post("/api/asistan/fotoGoruntule",{
       />
       <IconHome style={styles.homeIcon} size = {20} name={'home-outline'} onPress ={() => {
         navigation.navigate('Asistant');//sessionlar eklenecek
+        AsyncStorage.setItem("isDocPage","false")
       }}/>
     <View style={styles.lineStyle}>
     </View>
@@ -99,6 +100,7 @@ API.post("/api/asistan/fotoGoruntule",{
             <TouchableOpacity
             style={styles.docButton}
             onPress ={() => {
+              navigation.navigate('DepDocsGoruntule');
             }}
             >
               <View style={styles.containerKoyumavi}>
@@ -142,13 +144,15 @@ API.post("/api/asistan/fotoGoruntule",{
         {foto.map((val)=>
           <TouchableOpacity
           style={styles.fotoButton}
+          key={val.photos_id}
           onPress ={() => {
+              navigation.navigate('FotoGoruntule');
           }}
           >
             <View style={styles.containerKoyumaviFoto}>
               <Image style={styles.images}
               source={{uri:val.path}}
-              key={val.photos_id}
+
               />
             </View>
           </TouchableOpacity>
@@ -252,7 +256,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20,
     width: '100%',
-    borderRadius:5
+    borderRadius:5,
+
   },
 
   containerKoyumaviEkleFoto: {
@@ -299,6 +304,7 @@ const styles = StyleSheet.create({
 
   fotoButton:{
     width: 220,
+    paddingHorizontal:4
   },
 
   ekleButton: {
