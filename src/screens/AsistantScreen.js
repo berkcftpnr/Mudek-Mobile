@@ -34,7 +34,7 @@ export function AsistantScreen({navigation}) {
       AsyncStorage.removeItem("name")
       AsyncStorage.removeItem("id")
       AsyncStorage.removeItem("level")
-      AsyncStorage.removeItem("isDocPage")
+
       navigation.navigate('Login');//sessionlar eklenecek
 }}/>
 
@@ -56,7 +56,7 @@ export function AsistantScreen({navigation}) {
 
 
               )}
-            
+
           </Picker>
           <View style={styles.lineStyle}>
           </View>
@@ -67,7 +67,7 @@ export function AsistantScreen({navigation}) {
               alert("Dönem Seçiniz")
             }else{
             AsyncStorage.setItem("donemId",seciliDonem.toString());
-            AsyncStorage.setItem("isDocPage","true")
+
             navigation.navigate('DepDocs');
           }
         }}

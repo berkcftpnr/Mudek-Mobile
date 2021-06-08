@@ -19,6 +19,10 @@ export function DepDocs({navigation}) {
   const[donemAdi,setDonemAdi]= useState("");
   const[foto,setFoto]=useState([]);
 const[userId,setUserId]= useState("");
+const[docs,setDocs]= useState([]);
+//const unsubscribe = navigation.addListener('state', () => {
+
+  //});
       React.useEffect(() => {
 
     AsyncStorage.getItem('id').then((valueUser)=>{
@@ -27,7 +31,7 @@ const[userId,setUserId]= useState("");
 
   AsyncStorage.getItem('donemId').then((value)=>{
 
-    API.post("/api/asistan/donemGoruntule",{
+   API.post("/api/asistan/donemGoruntule",{
       idrequest:value
   }).then((response) => {
     setDonemAdi( response.data[0].name);
@@ -42,9 +46,40 @@ API.post("/api/asistan/fotoGoruntule",{
   setFoto( response.data );
 });
 
+API.post("/api/asistan/docGoruntule",{
+    donemID:value,
+    userID:valueUser
+        }).then((response) => {
+
+  setDocs( response.data );
+});
+
+
   })
     })
-  }, []);
+
+
+
+}, []);
+
+
+
+  const docSec = (val)=>{
+
+      AsyncStorage.setItem("docId",val.department_doc_id.toString())
+        navigation.navigate('DepDocsGoruntule');
+
+  }
+
+const fotoSec = (val)=>{
+
+
+    AsyncStorage.setItem("fotoId",val.photos_id.toString())
+      navigation.navigate('FotoGoruntule');
+
+}
+
+
 
 
   return (
@@ -54,7 +89,7 @@ API.post("/api/asistan/fotoGoruntule",{
       />
       <IconHome style={styles.homeIcon} size = {20} name={'home-outline'} onPress ={() => {
         navigation.navigate('Asistant');//sessionlar eklenecek
-        AsyncStorage.setItem("isDocPage","false")
+
       }}/>
     <View style={styles.lineStyle}>
     </View>
@@ -77,10 +112,13 @@ API.post("/api/asistan/fotoGoruntule",{
 
         <View style={styles.containerAcikmavi}>
           <ScrollView horizontal={true}>
+
+
+    {docs.map((val)=>
             <TouchableOpacity
             style={styles.docButton}
-            onPress ={() => {
-            }}
+              key={val.department_doc_id}
+            onPress ={() => docSec(val)}
             >
               <View style={styles.containerKoyumavi}>
                 <Image style={styles.pdfImage}
@@ -89,32 +127,11 @@ API.post("/api/asistan/fotoGoruntule",{
                 <View style={styles.lineStyleDoc}>
                 </View>
                 <Text style={{color:'#f5f5f5',fontSize:15}}>
-                  Evrak Adı
+                  {val.doc_desc}
                 </Text>
               </View>
             </TouchableOpacity>
-
-          <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-          </View>
-
-            <TouchableOpacity
-            style={styles.docButton}
-            onPress ={() => {
-              navigation.navigate('DepDocsGoruntule');
-            }}
-            >
-              <View style={styles.containerKoyumavi}>
-                <Image style={styles.pdfImage}
-                source={PDF_icon}
-                />
-                <View style={styles.lineStyleDoc}>
-                </View>
-                <Text style={{color:'#f5f5f5',fontSize:15}}>
-                  Evrak Adı
-                </Text>
-              </View>
-            </TouchableOpacity>
-
+)}
           <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
           </View>
 
@@ -145,9 +162,7 @@ API.post("/api/asistan/fotoGoruntule",{
           <TouchableOpacity
           style={styles.fotoButton}
           key={val.photos_id}
-          onPress ={() => {
-              navigation.navigate('FotoGoruntule');
-          }}
+          onPress ={() => fotoSec(val)}
           >
             <View style={styles.containerKoyumaviFoto}>
               <Image style={styles.images}

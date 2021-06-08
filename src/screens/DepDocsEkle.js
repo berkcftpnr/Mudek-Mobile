@@ -9,29 +9,99 @@ import { Error } from '../components/Error';
 import { API} from '../config/config';
 import ANKU_logo from '../images/ANKU_logo.png';
 import MUDEK_logo from '../images/MUDEK.png';
-
+import * as DocumentPicker from 'expo-document-picker';
 export function DepDocsEkle({navigation}) {
-    const[kullanıcıAdi,setKullaniciAdi]= useState("");
-    const[seciliDonem,setSeciliDonem]= useState("");
+    const[userId,setUserId]= useState("");
+    const[donem,setDonem]=useState("");
     const[donemler,setDonemler]=useState([]);
+      const[documan,setDocuman]=useState("");
 
+    const [aciklama, setAciklama] = useState("");
+    const [baslik, setBaslik] = useState("");
     React.useEffect(() => {
-    AsyncStorage.getItem('name').then((value)=>{
-      setKullaniciAdi(value)
+      AsyncStorage.getItem('id').then((value)=>{
+        setUserId(value)
 
-    })
+      })
 
-    API.get("/api/donemGoruntule").then((response) => {
-    setDonemler( response.data );
+          AsyncStorage.getItem('donemId').then((value)=>{
+            setDonem(value)
 
-});
+          })
+
+          setDocuman(undefined)
 
   }, []);
+
+  const sec =async ()=>{
+
+
+  const doc=await DocumentPicker.getDocumentAsync()
+
+  let lastIndex = doc.name.lastIndexOf(".");
+  // get the original extension of the file
+  let extension = doc.name.substring(lastIndex);
+  if(extension===".pdf")
+  {setDocuman(doc)}
+  else{
+  setDocuman(undefined)
+
+  }
+
+  console.log(doc,"  ",doc.name.length,"  ",extension)
+  }
+
+    const ekle =async ()=>{
+
+    let formData = new FormData();
+      if(documan!=undefined ){
+        var doc = {
+  uri: documan.uri,
+  type: 'document/pdf',
+  name: 'documan.pdf',
+  };
+   formData.append('file', doc);
+
+  //  setUploding(true);
+  let { data } = await API.post('/api/depdocs/single-upload', formData, {
+    onUploadProgress: ({ loaded, total }) => {
+        let progress = ((loaded / total) * 100).toFixed(2);
+      //  setProgress(progress);
+    }
+  });
+
+  //setUplodedImg(data.imagePath);
+
+  API.post("/api/asistan/docEkle",{
+
+  userId:userId,
+  path: data.docPath,
+  donem:donem,
+  name:baslik,
+  explanation:aciklama,
+  }).then((response)=>{
+  if(response.data.message){
+    alert(response.data.message)
+  }})
+
+  //setUploding(false);
+
+  setDocuman(undefined)
+  }else{
+  alert("Evrak Seçiniz")
+  }
+
+
+    }
+
+
+
 
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
-      navigation.navigate('Login');//sessionlar eklenecek
+      navigation.navigate('Asistant');
+      navigation.navigate('DepDocs');//sessionlar eklenecek
 }}/>
 
     <Image style={styles.ANKU_logo}
@@ -44,19 +114,26 @@ export function DepDocsEkle({navigation}) {
           </View>
           <Input style={styles.input}
           placeholder={'Başlık'}
+          maxLength={15}
+          onChangeText={text => setBaslik(text)}
           />
+
           <Input style={styles.input}
           multiline = {true}
           numberOfLines = {4}
           placeholder={'Açıklama'}
+          maxLength={500}
+          onChangeText={text => setAciklama(text)}
           />
           <View style={styles.lineStyle}>
           </View>
           <FilledButton title={'Seç'}
           style={styles.secButton}
-          onPress ={() => {
-            navigation.navigate('DepDocs');
-          }}
+          onPress ={sec}
+          />
+          <FilledButton title={'Ekle'}
+          style={styles.ekleButton}
+          onPress ={ekle}
           />
       <StatusBar style="auto" />
 

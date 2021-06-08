@@ -30,7 +30,7 @@ export function LoginScreen({navigation}) {
     AsyncStorage.setItem("name",response.data[0].name_m)
     AsyncStorage.setItem("id",response.data[0].user_id.toString())
     AsyncStorage.setItem("level",response.data[0].authlevel_m.toString())
-    AsyncStorage.setItem("isDocPage","false")
+
 
     switch (response.data[0].authlevel_m) {
          case 0:

@@ -11,34 +11,39 @@ import ANKU_logo from '../images/ANKU_logo.png';
 import MUDEK_logo from '../images/MUDEK.png';
 import Placeholder from '../images/placeholder.png';
 //import DocumentPicker from 'react-native-document-picker';
-import * as DocumentPicker from 'expo-document-picker';
+
 
 export function FotoGoruntule({navigation}) {
-    const[userId,setUserId]= useState("");
-    const[seciliDonem,setSeciliDonem]= useState("");
-    const[donem,setDonem]=useState("");
-    const[foto,setFoto]=useState("");
 
-    const [isUploding, setUploding] = useState(false);
-    const [uploadedImg, setUplodedImg] = useState("");
-    const [uploadProgress, setProgress] = useState(0);
+    const[fotoSrc,setFotoSrc]=useState("http://192.168.1.23:4001/photos/placeholder.png");
+    const[fotoId,setFotoId]=useState("");
+
+
 
     const [aciklama, setAciklama] = useState("");
     const [baslik, setBaslik] = useState("");
     React.useEffect(() => {
 
-    AsyncStorage.getItem('id').then((value)=>{
-      setUserId(value)
+    AsyncStorage.getItem('fotoId').then((value)=>{
+
+
+API.post("/api/asistan/fotoGoruntule2",{
+    fotoId:value,
+
+        }).then((response) => {
+
+  setFotoSrc( response.data[0].path );
+  setBaslik(response.data[0].doc_desc)
+  setAciklama(response.data[0].explanation)
+  setFotoId(value)
+});
+
 
     })
 
-        AsyncStorage.getItem('donemId').then((value)=>{
-          setDonem(value)
-
-        })
 
 
-    setFoto(Placeholder)
+
 
 
 
@@ -50,12 +55,41 @@ export function FotoGoruntule({navigation}) {
 
 
 
-    const sec =async ()=>{
+    const sil = ()=>{
+
+      API.post("/api/asistan/fotosil",{
+          fotoId:fotoId,
+      }).then((response)=>{
+  navigation.navigate('Asistant');
+  navigation.navigate('DepDocs');
+        if(response.data.message){
+          alert(response.data.message)
+        }
+
+      })
 
 
     }
 
-      const ekle =async ()=>{
+    const indir = ()=>{
+
+    }
+
+
+
+      const guncelle = ()=>{
+        API.post("/api/asistan/fotoguncelle",{
+                fotoId:fotoId,
+                desc:baslik,
+                exp:aciklama
+            }).then((response)=>{
+
+              if(response.data.message){
+                alert(response.data.message)
+              }
+
+            })
+
 
 
       }
@@ -65,6 +99,8 @@ export function FotoGoruntule({navigation}) {
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
+      AsyncStorage.removeItem("fotoId")
+      navigation.navigate('Asistant');
       navigation.navigate('DepDocs');//sessionlar eklenecek
 
 }}/>
@@ -74,17 +110,18 @@ export function FotoGoruntule({navigation}) {
       />
       <View style={styles.lineStyle}>
       </View>
-          <Heading style= {styles.title} >Fotoğraf Ekleyiniz</Heading>
+          <Heading style= {styles.title} >{baslik}</Heading>
           <View style={styles.lineStyle}>
           </View>
           <ScrollView style={styles.scrollView} >
           <Image style={styles.selected_image}
-                  source={foto}
+                  source={{uri:fotoSrc}}
               />
           <Input style={styles.input}
           placeholder={'Başlık'}
           maxLength={15}
           onChangeText={text => setBaslik(text)}
+          defaultValue={baslik}
           />
 
           <Input style={styles.input}
@@ -92,24 +129,22 @@ export function FotoGoruntule({navigation}) {
           numberOfLines = {4}
           placeholder={'Açıklama'}
           maxLength={500}
+          defaultValue={aciklama}
           onChangeText={text => setAciklama(text)}
           />
               <View style={styles.rowContainer}>
 
               <FilledButton title={'Güncelle'}
               style={styles.ekleButton}
-              onPress ={ekle}
+              onPress ={guncelle}
               />
 
           <FilledButton title={'Sil'}
           style={styles.secButton}
-          onPress ={sec}
+          onPress ={sil}
 
           />
-          <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={() => {
-          //sessionlar eklenecek
-
-      }}/>
+          <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={indir}/>
             </View>
 
 

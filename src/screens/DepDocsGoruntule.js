@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View , Alert, AsyncStorage ,Image , Picker ,PermissionsAndroid,ScrollView} from 'react-native';
+import { StyleSheet, Text, View , Alert, AsyncStorage ,Image ,Linking, Picker ,PermissionsAndroid,ScrollView} from 'react-native';
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
@@ -13,33 +13,33 @@ import Placeholder from '../images/placeholder.png';
 //import DocumentPicker from 'react-native-document-picker';
 import * as DocumentPicker from 'expo-document-picker';
 
+
+
+
 export function DepDocsGoruntule({navigation}) {
-    const[userId,setUserId]= useState("");
-    const[seciliDonem,setSeciliDonem]= useState("");
-    const[donem,setDonem]=useState("");
-    const[foto,setFoto]=useState("");
+  const[docSrc,setDocSrc]=useState("");
+  const[docId,setDocId]=useState("");
 
-    const [isUploding, setUploding] = useState(false);
-    const [uploadedImg, setUplodedImg] = useState("");
-    const [uploadProgress, setProgress] = useState(0);
 
-    const [aciklama, setAciklama] = useState("");
-    const [baslik, setBaslik] = useState("");
+
+  const [aciklama, setAciklama] = useState("");
+  const [baslik, setBaslik] = useState("");
     React.useEffect(() => {
 
-    AsyncStorage.getItem('id').then((value)=>{
-      setUserId(value)
+      AsyncStorage.getItem('docId').then((value)=>{
+      API.post("/api/asistan/documanGoruntule",{
+          docID:value,
 
-    })
+              }).then((response) => {
 
-        AsyncStorage.getItem('donemId').then((value)=>{
-          setDonem(value)
+        setDocSrc( response.data[0].path );
+        setBaslik(response.data[0].doc_desc)
+        setAciklama(response.data[0].explanation)
+        setDocId(value)
+      });
 
-        })
 
-
-    setFoto(Placeholder)
-
+          })
 
 
   }, []);
@@ -50,13 +50,33 @@ export function DepDocsGoruntule({navigation}) {
 
 
 
-    const sec =async ()=>{
+    const sil = ()=>{
 
+      API.post("/api/asistan/docsil",{
+          docId:docId,
+      }).then((response)=>{
+  navigation.navigate('Asistant');
+  navigation.navigate('DepDocs');
+        if(response.data.message){
+          alert(response.data.message)
+        }
+
+      })
 
     }
 
-      const ekle =async ()=>{
+      const guncelle =()=>{
+        API.post("/api/asistan/docguncelle",{
+                docId:docId,
+                desc:baslik,
+                exp:aciklama
+            }).then((response)=>{
 
+              if(response.data.message){
+                alert(response.data.message)
+              }
+
+            })
 
       }
 
@@ -65,6 +85,8 @@ export function DepDocsGoruntule({navigation}) {
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
+      AsyncStorage.removeItem("docId")
+        navigation.navigate('Asistant');
       navigation.navigate('DepDocs');//sessionlar eklenecek
 
 }}/>
@@ -74,7 +96,8 @@ export function DepDocsGoruntule({navigation}) {
       />
       <View style={styles.lineStyle}>
       </View>
-          <Heading style= {styles.title} >Doküman Adı</Heading>
+
+          <Heading style= {styles.title} >{baslik}</Heading>
           <View style={styles.lineStyle}>
           </View>
           <ScrollView style={styles.scrollView} >
@@ -83,6 +106,7 @@ export function DepDocsGoruntule({navigation}) {
           placeholder={'Başlık'}
           maxLength={15}
           onChangeText={text => setBaslik(text)}
+          defaultValue={baslik}
           />
 
           <Input style={styles.input}
@@ -90,23 +114,24 @@ export function DepDocsGoruntule({navigation}) {
           numberOfLines = {4}
           placeholder={'Açıklama'}
           maxLength={500}
+          defaultValue={aciklama}
           onChangeText={text => setAciklama(text)}
           />
               <View style={styles.rowContainer}>
 
               <FilledButton title={'Güncelle'}
               style={styles.ekleButton}
-              onPress ={ekle}
+              onPress ={guncelle}
               />
 
           <FilledButton title={'Sil'}
           style={styles.secButton}
-          onPress ={sec}
+          onPress ={sil}
 
           />
-          <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={() => {
+          <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={async() => {
           //sessionlar eklenecek
-
+          await Linking.openURL(docSrc);
       }}/>
             </View>
 

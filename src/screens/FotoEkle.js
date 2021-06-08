@@ -116,7 +116,8 @@ alert("Fotoğraf Seçiniz")
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
-      navigation.navigate('DepDocs');//sessionlar eklenecek
+      navigation.navigate('Asistant');
+      navigation.navigate('DepDocs');//sessionlar ekleneceks
 
 }}/>
 
