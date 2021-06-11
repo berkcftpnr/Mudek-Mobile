@@ -20,9 +20,9 @@ export function DepDocs({navigation}) {
   const[foto,setFoto]=useState([]);
 const[userId,setUserId]= useState("");
 const[docs,setDocs]= useState([]);
-//const unsubscribe = navigation.addListener('state', () => {
+/*const unsubscribe = navigation.addListener('state', () => {
 
-  //});
+});*/
       React.useEffect(() => {
 
     AsyncStorage.getItem('id').then((valueUser)=>{
@@ -162,7 +162,7 @@ const fotoSec = (val)=>{
           <TouchableOpacity
           style={styles.fotoButton}
           key={val.photos_id}
-          onPress ={() => fotoSec(val)}
+          onPress ={() => fotoSec(val) }
           >
             <View style={styles.containerKoyumaviFoto}>
               <Image style={styles.images}

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View , Alert, AsyncStorage ,Image , Picker ,ScrollVie
 import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/Input';
-
+import { API} from '../config/config';
 import { Error } from '../components/Error';
 import { IconHome } from '../components/IconHome';
 import ANKU_logo from '../images/ANKU_logo.png';
@@ -13,10 +13,120 @@ import PDF_icon from '../images/pdf_icon.png';
 import EKLE_img from '../images/ekle_img.png';
 import Fakulte_logo from '../images/fakulte_logo.png';
 export function Lecture({navigation}) {
+  const[donemAdi,setDonemAdi]= useState("");
+    const[dersAdi,setDersAdi]= useState("");
+
+const[userId,setUserId]= useState("");
+
+const[detID,setdetId]= useState("");
+const[lectureDocs,setLectureDocs]= useState([]);
+const[examDocs,setExamDocs]= useState([]);
+const[kazanimlar,setKazanimlar]= useState([]);
+const[anketDocs,setAnketDocs]= useState([]);
+React.useEffect(() => {
+
+AsyncStorage.getItem('id').then((valueUser)=>{
+    setUserId(valueUser)
+
+
+AsyncStorage.getItem('donemId').then((value)=>{
+
+AsyncStorage.getItem('dersId').then((dersValue)=>{
+
+API.post("/api/asistan/donemGoruntule",{
+idrequest:value
+}).then((response) => {
+setDonemAdi( response.data[0].name);
+
+});
+
+API.post("/api/egitmen/dersGoruntule",{
+idrequest:dersValue
+}).then((response) => {
+setDersAdi( response.data[0].lecture_name);
+
+});
+
+API.post("/api/egitmen/lectureDet",{
+    dersID:dersValue,
+    donemID:value,
+    userID:valueUser
+}).then((response) => {
+  setdetId( response.data[0].lecture_det_id);
+  AsyncStorage.setItem("lecDetId",response.data[0].lecture_det_id.toString())
+  API.post("/api/egitmen/lectureDocGoruntule",{
+      lecDetID:response.data[0].lecture_det_id
+
+  }).then((response) => {
+    setLectureDocs( response.data);
+
+  });
+
+  API.post("/api/egitmen/anketDocGoruntule",{
+      lecDetID:response.data[0].lecture_det_id
+
+  }).then((response) => {
+    setAnketDocs( response.data);
+
+  });
+
+  API.post("/api/egitmen/examDocGoruntule",{
+      lecDetID:response.data[0].lecture_det_id
+
+  }).then((response) => {
+    setExamDocs( response.data);
+
+  });
+
+  API.post("/api/egitmen/kazanimGoruntule",{
+      lecDetID:response.data[0].lecture_det_id
+
+  }).then((response) => {
+    setKazanimlar( response.data);
+
+  });
+
+});
+
+})
+})
+})
+
+
+
+}, []);
 
 
 
 
+
+  const lectureDocSec = (val)=>{
+
+      AsyncStorage.setItem("lecDocId",val.lecture_doc_id.toString())
+        navigation.navigate('DersiciGoruntule');
+
+  }
+
+  const examDocSec = (val)=>{
+
+      AsyncStorage.setItem("examDocId",val.exam_doc_id.toString())
+        navigation.navigate('SinavDocGoruntule');
+
+  }
+
+  const anketSec = (val)=>{
+
+      AsyncStorage.setItem("anketId",val.doc_id.toString())
+      navigation.navigate('AnketGoruntule');
+
+  }
+
+  const kazanimSec = (val)=>{
+
+      AsyncStorage.setItem("kazanimId",val.attainments_id.toString())
+        navigation.navigate('KazanimGoruntule');
+
+  }
   return (
     <View style={styles.container}>
     <Image style={styles.ANKU_logo}
@@ -24,6 +134,7 @@ export function Lecture({navigation}) {
       />
 
       <IconHome style={styles.homeIcon} size = {20} name={'home-outline'} onPress ={() => {
+        AsyncStorage.removeItem("lecDetId")
         navigation.navigate('Instructor');//sessionlar eklenecek
       }}/>
       <View style={styles.lineStyle}>
@@ -34,9 +145,9 @@ export function Lecture({navigation}) {
             source={Fakulte_logo}
         />
 
-      <Heading style= {styles.titletop} >Bilgisayar Programlama </Heading>
+      <Heading style= {styles.titletop} >{dersAdi} </Heading>
       </View>
-      <Heading style= {styles.titletop} >2020 - 2021 Güz Dönemi </Heading>
+      <Heading style= {styles.titletop} >{donemAdi} </Heading>
 
 
 
@@ -51,42 +162,26 @@ export function Lecture({navigation}) {
           </View>
           <View style={styles.containerAcikmavi}>
             <ScrollView horizontal={true}>
-              <TouchableOpacity
-              style={styles.docButton}
-              onPress ={() => {
-              }}
-              >
-                <View style={styles.containerKoyumavi}>
-                  <Image style={styles.pdfImage}
-                  source={PDF_icon}
-                  />
-                  <View style={styles.lineStyleDoc}>
-                  </View>
-                  <Text style={{color:'#f5f5f5',fontSize:15}}>
-                    Evrak Adı
-                  </Text>
-                </View>
-              </TouchableOpacity>
+            {lectureDocs.map((val)=>
+                    <TouchableOpacity
+                    style={styles.docButton}
+                      key={val.lecture_doc_id}
+                    onPress ={() => lectureDocSec(val)}
+                    >
+                      <View style={styles.containerKoyumavi}>
+                        <Image style={styles.pdfImage}
+                        source={PDF_icon}
+                        />
+                        <View style={styles.lineStyleDoc}>
+                        </View>
+                        <Text style={{color:'#f5f5f5',fontSize:15}}>
+                          {val.doc_name}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+        )}
 
-            <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-            </View>
 
-              <TouchableOpacity
-              style={styles.docButton}
-              onPress ={() => {
-              }}
-              >
-                <View style={styles.containerKoyumavi}>
-                  <Image style={styles.pdfImage}
-                  source={PDF_icon}
-                  />
-                  <View style={styles.lineStyleDoc}>
-                  </View>
-                  <Text style={{color:'#f5f5f5',fontSize:15}}>
-                    Evrak Adı
-                  </Text>
-                </View>
-              </TouchableOpacity>
 
             <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
             </View>
@@ -113,42 +208,26 @@ export function Lecture({navigation}) {
       </View>
       <View style={styles.containerAcikmavi}>
         <ScrollView horizontal={true}>
-          <TouchableOpacity
-          style={styles.docButton}
-          onPress ={() => {
-          }}
-          >
-            <View style={styles.containerKoyumavi}>
-              <Image style={styles.pdfImage}
-              source={PDF_icon}
-              />
-              <View style={styles.lineStyleDoc}>
-              </View>
-              <Text style={{color:'#f5f5f5',fontSize:15}}>
-                Evrak Adı
-              </Text>
-            </View>
-          </TouchableOpacity>
+        {examDocs.map((val)=>
+                <TouchableOpacity
+                style={styles.docButton}
+                  key={val.exam_doc_id}
+                onPress ={() => examDocSec(val)}
+                >
+                  <View style={styles.containerKoyumavi}>
+                    <Image style={styles.pdfImage}
+                    source={PDF_icon}
+                    />
+                    <View style={styles.lineStyleDoc}>
+                    </View>
+                    <Text style={{color:'#f5f5f5',fontSize:15}}>
+                      {val.doc_name}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+    )}
 
-        <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-        </View>
 
-          <TouchableOpacity
-          style={styles.docButton}
-          onPress ={() => {
-          }}
-          >
-            <View style={styles.containerKoyumavi}>
-              <Image style={styles.pdfImage}
-              source={PDF_icon}
-              />
-              <View style={styles.lineStyleDoc}>
-              </View>
-              <Text style={{color:'#f5f5f5',fontSize:15}}>
-                Evrak Adı
-              </Text>
-            </View>
-          </TouchableOpacity>
 
         <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
         </View>
@@ -175,32 +254,20 @@ export function Lecture({navigation}) {
       </View>
       <View style={styles.containerAcikmavi}>
         <ScrollView horizontal={true}>
+          {kazanimlar.map((val)=>
           <TouchableOpacity
           style={styles.fotoButton}
-          onPress ={() => {
-          }}
+              key={val.attainments_id}
+          onPress ={() => kazanimSec(val)}
           >
           <View style={styles.containerKoyumaviFoto}>
             <Heading style= {styles.titleKazanim}>
-              Kazanım 1
+            {val.attainment_type} Kazanımları
             </Heading>
           </View>
         </TouchableOpacity>
+)}
 
-      <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-      </View>
-
-        <TouchableOpacity
-        style={styles.fotoButton}
-        onPress ={() => {
-        }}
-        >
-          <View style={styles.containerKoyumaviFoto}>
-            <Heading style= {styles.titleKazanim}>
-              Kazanım 2
-            </Heading>
-          </View>
-        </TouchableOpacity>
 
       <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
       </View>
@@ -229,42 +296,26 @@ export function Lecture({navigation}) {
   </View>
   <View style={styles.containerAcikmavi}>
     <ScrollView horizontal={true}>
-      <TouchableOpacity
-      style={styles.docButton}
-      onPress ={() => {
-      }}
-      >
-        <View style={styles.containerKoyumavi}>
-          <Image style={styles.pdfImage}
-          source={PDF_icon}
-          />
-          <View style={styles.lineStyleDoc}>
-          </View>
-          <Text style={{color:'#f5f5f5',fontSize:15}}>
-            Evrak Adı
-          </Text>
-        </View>
-      </TouchableOpacity>
+    {anketDocs.map((val)=>
+            <TouchableOpacity
+            style={styles.docButton}
+              key={val.doc_id}
+            onPress ={() => anketSec(val)}
+            >
+              <View style={styles.containerKoyumavi}>
+                <Image style={styles.pdfImage}
+                source={PDF_icon}
+                />
+                <View style={styles.lineStyleDoc}>
+                </View>
+                <Text style={{color:'#f5f5f5',fontSize:15}}>
+                  {val.doc_name}
+                </Text>
+              </View>
+            </TouchableOpacity>
+)}
 
-    <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-    </View>
 
-      <TouchableOpacity
-      style={styles.docButton}
-      onPress ={() => {
-      }}
-      >
-        <View style={styles.containerKoyumavi}>
-          <Image style={styles.pdfImage}
-          source={PDF_icon}
-          />
-          <View style={styles.lineStyleDoc}>
-          </View>
-          <Text style={{color:'#f5f5f5',fontSize:15}}>
-            Evrak Adı
-          </Text>
-        </View>
-      </TouchableOpacity>
 
     <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
     </View>

@@ -9,28 +9,53 @@ import { Error } from '../components/Error';
 import { API} from '../config/config';
 import ANKU_logo from '../images/ANKU_logo.png';
 import MUDEK_logo from '../images/MUDEK.png';
-
+import * as DocumentPicker from 'expo-document-picker';
 export function KazanimEkle({navigation}) {
-    const[kullanıcıAdi,setKullaniciAdi]= useState("");
-    const[seciliDonem,setSeciliDonem]= useState("");
-    const[donemler,setDonemler]=useState([]);
+    const[lecDetId,setLecDecId]= useState("");
 
+
+    const [aciklama, setAciklama] = useState("");
+    const [baslik, setBaslik] = useState("Sınav Soruları");
     React.useEffect(() => {
-    AsyncStorage.getItem('name').then((value)=>{
-      setKullaniciAdi(value)
+      AsyncStorage.getItem('lecDetId').then((value)=>{
+        setLecDecId(value)
 
-    })
+      })
 
-    API.get("/api/donemGoruntule").then((response) => {
-    setDonemler( response.data );
 
-});
+
 
   }, []);
+
+
+
+    const ekle =async ()=>{
+
+
+  API.post("/api/instructor/kazanimEkle",{
+
+  lectureDetId:lecDetId,
+  type:baslik,
+  explanation:aciklama,
+  }).then((response)=>{
+  if(response.data.message){
+    alert(response.data.message)
+  }})
+
+  //setUploding(false);
+
+
+
+
+    }
+
+
+
 
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
+      navigation.navigate('Instructor');
       navigation.navigate('Lecture');//sessionlar eklenecek
 }}/>
 
@@ -42,22 +67,32 @@ export function KazanimEkle({navigation}) {
           <Heading style= {styles.title} >Ders Öğrenme Kazanımı Ekleyiniz</Heading>
           <View style={styles.lineStyle}>
           </View>
-          <Input style={styles.input}
-          placeholder={'Başlık'}
-          />
+          <Picker style={styles.rol_secimi}
+            selectedValue={baslik}
+            style={{ height: 50, width: 300 }}
+            onValueChange={(itemValue, itemIndex) => setBaslik(itemValue)}
+          >
+            <Picker.Item label="Sınav Soruları" value="Sınav Soruları" />
+            <Picker.Item label="Cevap Anahtarı" value="Cevap Anahtarı" />
+            <Picker.Item label="1. Vize" value="1. Vize" />
+            <Picker.Item label="2. Vize" value="2. Vize" />
+            <Picker.Item label="Final" value="Final" />
+          </Picker>
+
           <Input style={styles.input}
           multiline = {true}
           numberOfLines = {4}
           placeholder={'Açıklama'}
+          maxLength={500}
+          onChangeText={text => setAciklama(text)}
           />
           <View style={styles.lineStyle}>
           </View>
-          <FilledButton title={'Seç'}
+          <FilledButton title={'Ekle'}
           style={styles.secButton}
-          onPress ={() => {
-            navigation.navigate('Lecture');
-          }}
+          onPress ={ekle}
           />
+
       <StatusBar style="auto" />
 
     </View>

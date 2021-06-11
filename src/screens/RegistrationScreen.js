@@ -37,13 +37,6 @@ export function RegistrationScreen({navigation}) {
   else{
       var idCo;
 
-      var role=4;
-      if(selectedValue==="Asistan")
-      role=5;
-      else if(selectedValue==="Egitmen")
-      role=4;
-      else if(selectedValue==="Mudekyetkilisi")
-      role=6;
 
 
         API.get("/api/kayitOl2").then((response)=>{
@@ -68,7 +61,7 @@ export function RegistrationScreen({navigation}) {
   id:idcount-1,
   eMail:email,
   password:sifre,
-  level:role,
+  level:selectedValue,
   uname:isim
 
 }).then((response)=>{

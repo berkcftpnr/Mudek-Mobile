@@ -16,8 +16,8 @@ import * as DocumentPicker from 'expo-document-picker';
 
 
 
-export function DepDocsGoruntule({navigation}) {
-  const[docSrc,setDocSrc]=useState("");
+export function KazanimGoruntule({navigation}) {
+
   const[docId,setDocId]=useState("");
 
 
@@ -26,14 +26,13 @@ export function DepDocsGoruntule({navigation}) {
   const [baslik, setBaslik] = useState("");
     React.useEffect(() => {
 
-      AsyncStorage.getItem('docId').then((value)=>{
-      API.post("/api/asistan/documanGoruntule",{
+      AsyncStorage.getItem('kazanimId').then((value)=>{
+      API.post("/api/egitmen/kazanimiGoruntule",{
           docID:value,
 
               }).then((response) => {
 
-        setDocSrc( response.data[0].path );
-        setBaslik(response.data[0].doc_desc)
+        setBaslik(response.data[0].attainment_type)
         setAciklama(response.data[0].explanation)
         setDocId(value)
       });
@@ -52,12 +51,12 @@ export function DepDocsGoruntule({navigation}) {
 
     const sil = ()=>{
 
-      API.post("/api/asistan/docsil",{
+      API.post("api/egitmen/kazanimsil",{
           docId:docId,
       }).then((response)=>{
-  AsyncStorage.removeItem("docId")
-  navigation.navigate('Asistant');
-  navigation.navigate('DepDocs');
+        AsyncStorage.removeItem("kazanimId")
+        navigation.navigate('Instructor');
+        navigation.navigate('Lecture');
         if(response.data.message){
           alert(response.data.message)
         }
@@ -67,9 +66,8 @@ export function DepDocsGoruntule({navigation}) {
     }
 
       const guncelle =()=>{
-        API.post("/api/asistan/docguncelle",{
+        API.post("/api/egitmen/kazanimguncelle",{
                 docId:docId,
-                desc:baslik,
                 exp:aciklama
             }).then((response)=>{
 
@@ -86,9 +84,9 @@ export function DepDocsGoruntule({navigation}) {
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
-      AsyncStorage.removeItem("docId")
-        navigation.navigate('Asistant');
-      navigation.navigate('DepDocs');//sessionlar eklenecek
+      AsyncStorage.removeItem("kazanimId")
+      navigation.navigate('Instructor');
+      navigation.navigate('Lecture');//sessionlar eklenecek
 
 }}/>
 
@@ -103,12 +101,7 @@ export function DepDocsGoruntule({navigation}) {
           </View>
           <ScrollView style={styles.scrollView} >
 
-          <Input style={styles.input}
-          placeholder={'Başlık'}
-          maxLength={15}
-          onChangeText={text => setBaslik(text)}
-          defaultValue={baslik}
-          />
+
 
           <Input style={styles.input}
           multiline = {true}
@@ -130,10 +123,7 @@ export function DepDocsGoruntule({navigation}) {
           onPress ={sil}
 
           />
-          <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={async() => {
-          //sessionlar eklenecek
-          await Linking.openURL(docSrc);
-      }}/>
+
             </View>
 
 
@@ -201,7 +191,7 @@ rowContainer: {
 ekleButton: {
       marginVertical: 40,
       width:'32%',
-      marginHorizontal:15,
+      marginHorizontal:35,
       height:60
 
   },

@@ -9,28 +9,92 @@ import { Error } from '../components/Error';
 import { API} from '../config/config';
 import ANKU_logo from '../images/ANKU_logo.png';
 import MUDEK_logo from '../images/MUDEK.png';
-
+import * as DocumentPicker from 'expo-document-picker';
 export function AnketEkle({navigation}) {
-    const[kullanıcıAdi,setKullaniciAdi]= useState("");
-    const[seciliDonem,setSeciliDonem]= useState("");
-    const[donemler,setDonemler]=useState([]);
+    const[lecDetId,setLecDecId]= useState("");
+    const[donem,setDonem]=useState("");
+    const[documan,setDocuman]=useState("");
 
+    const [aciklama, setAciklama] = useState("");
+    const [baslik, setBaslik] = useState("");
     React.useEffect(() => {
-    AsyncStorage.getItem('name').then((value)=>{
-      setKullaniciAdi(value)
+      AsyncStorage.getItem('lecDetId').then((value)=>{
+        setLecDecId(value)
 
-    })
+      })
 
-    API.get("/api/donemGoruntule").then((response) => {
-    setDonemler( response.data );
 
-});
+          setDocuman(undefined)
 
   }, []);
+
+  const sec =async ()=>{
+
+
+  const doc=await DocumentPicker.getDocumentAsync()
+
+  let lastIndex = doc.name.lastIndexOf(".");
+  // get the original extension of the file
+  let extension = doc.name.substring(lastIndex);
+  if(extension===".pdf")
+  {setDocuman(doc)}
+  else{
+  setDocuman(undefined)
+
+  }
+
+  console.log(doc,"  ",doc.name.length,"  ",extension)
+  }
+
+    const ekle =async ()=>{
+
+    let formData = new FormData();
+      if(documan!=undefined ){
+        var doc = {
+  uri: documan.uri,
+  type: 'document/pdf',
+  name: 'documan.pdf',
+  };
+   formData.append('file', doc);
+
+  //  setUploding(true);
+  let { data } = await API.post('/api/anketdocs/single-upload', formData, {
+    onUploadProgress: ({ loaded, total }) => {
+        let progress = ((loaded / total) * 100).toFixed(2);
+      //  setProgress(progress);
+    }
+  });
+
+  //setUplodedImg(data.imagePath);
+
+  API.post("/api/instructor/anketDocEkle",{
+
+  lectureDetId:lecDetId,
+  path: data.docPath,
+  name:baslik,
+  explanation:aciklama,
+  }).then((response)=>{
+  if(response.data.message){
+    alert(response.data.message)
+  }})
+
+  //setUploding(false);
+
+  setDocuman(undefined)
+  }else{
+  alert("Evrak Seçiniz")
+  }
+
+
+    }
+
+
+
 
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
+      navigation.navigate('Instructor');
       navigation.navigate('Lecture');//sessionlar eklenecek
 }}/>
 
@@ -39,24 +103,31 @@ export function AnketEkle({navigation}) {
       />
       <View style={styles.lineStyle}>
       </View>
-          <Heading style= {styles.title} >Ölçme ve Değerlendirme Ekleyiniz</Heading>
+          <Heading style= {styles.title} >Ölçme ve Değerlendirme Evrağı Ekleyiniz</Heading>
           <View style={styles.lineStyle}>
           </View>
           <Input style={styles.input}
           placeholder={'Başlık'}
+          maxLength={15}
+          onChangeText={text => setBaslik(text)}
           />
+
           <Input style={styles.input}
           multiline = {true}
           numberOfLines = {4}
           placeholder={'Açıklama'}
+          maxLength={500}
+          onChangeText={text => setAciklama(text)}
           />
           <View style={styles.lineStyle}>
           </View>
           <FilledButton title={'Seç'}
           style={styles.secButton}
-          onPress ={() => {
-            navigation.navigate('Lecture');
-          }}
+          onPress ={sec}
+          />
+          <FilledButton title={'Ekle'}
+          style={styles.ekleButton}
+          onPress ={ekle}
           />
       <StatusBar style="auto" />
 
@@ -76,6 +147,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
       marginTop:30,
     textAlign:'center',
+      fontSize:28
   },
   input: {
       marginVertical: 8,

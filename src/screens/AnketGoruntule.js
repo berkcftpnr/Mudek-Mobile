@@ -16,7 +16,7 @@ import * as DocumentPicker from 'expo-document-picker';
 
 
 
-export function DepDocsGoruntule({navigation}) {
+export function AnketGoruntule({navigation}) {
   const[docSrc,setDocSrc]=useState("");
   const[docId,setDocId]=useState("");
 
@@ -26,15 +26,15 @@ export function DepDocsGoruntule({navigation}) {
   const [baslik, setBaslik] = useState("");
     React.useEffect(() => {
 
-      AsyncStorage.getItem('docId').then((value)=>{
-      API.post("/api/asistan/documanGoruntule",{
+      AsyncStorage.getItem('anketId').then((value)=>{
+      API.post("/api/egitmen/anketdocumanGoruntule",{
           docID:value,
 
               }).then((response) => {
 
         setDocSrc( response.data[0].path );
-        setBaslik(response.data[0].doc_desc)
-        setAciklama(response.data[0].explanation)
+        setBaslik(response.data[0].doc_name)
+        setAciklama(response.data[0].doc_desc)
         setDocId(value)
       });
 
@@ -52,12 +52,12 @@ export function DepDocsGoruntule({navigation}) {
 
     const sil = ()=>{
 
-      API.post("/api/asistan/docsil",{
+      API.post("/api/egitmen/anketdocsil",{
           docId:docId,
       }).then((response)=>{
-  AsyncStorage.removeItem("docId")
-  navigation.navigate('Asistant');
-  navigation.navigate('DepDocs');
+        AsyncStorage.removeItem("anketId")
+        navigation.navigate('Instructor');
+        navigation.navigate('Lecture');
         if(response.data.message){
           alert(response.data.message)
         }
@@ -67,7 +67,7 @@ export function DepDocsGoruntule({navigation}) {
     }
 
       const guncelle =()=>{
-        API.post("/api/asistan/docguncelle",{
+        API.post("/api/egitmen/anketdocguncelle",{
                 docId:docId,
                 desc:baslik,
                 exp:aciklama
@@ -86,9 +86,9 @@ export function DepDocsGoruntule({navigation}) {
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
-      AsyncStorage.removeItem("docId")
-        navigation.navigate('Asistant');
-      navigation.navigate('DepDocs');//sessionlar eklenecek
+      AsyncStorage.removeItem("anketId")
+      navigation.navigate('Instructor');
+      navigation.navigate('Lecture');//sessionlar eklenecek
 
 }}/>
 

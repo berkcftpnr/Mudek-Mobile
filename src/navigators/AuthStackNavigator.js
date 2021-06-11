@@ -20,6 +20,10 @@ import {Contact} from '../screens/Contact';
 import {Lecture} from '../screens/Lecture';
 import {FotoGoruntule} from '../screens/FotoGoruntule';
 import {DepDocsGoruntule} from '../screens/DepDocsGoruntule';
+import {DersiciGoruntule} from '../screens/DersiciGoruntule';
+import {SinavDocGoruntule} from '../screens/SinavDocGoruntule';
+import {KazanimGoruntule} from '../screens/KazanimGoruntule';
+import {AnketGoruntule} from '../screens/AnketGoruntule';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -53,6 +57,10 @@ export function AuthStackNavigator() {
           <AuthStack.Screen name={'SifremiUnuttum'} component={SifremiUnuttum} />
           <AuthStack.Screen name={'FotoGoruntule'} component={FotoGoruntule} />
           <AuthStack.Screen name={'DepDocsGoruntule'} component={DepDocsGoruntule} />
+          <AuthStack.Screen name={'DersiciGoruntule'} component={DersiciGoruntule} />
+          <AuthStack.Screen name={'SinavDocGoruntule'} component={SinavDocGoruntule} />
+          <AuthStack.Screen name={'KazanimGoruntule'} component={KazanimGoruntule} />
+          <AuthStack.Screen name={'AnketGoruntule'} component={AnketGoruntule} />
           <AuthStack.Screen name={'Contact'} component={Contact} />
       </AuthStack.Navigator>
 

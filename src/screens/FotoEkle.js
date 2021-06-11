@@ -17,7 +17,7 @@ export function FotoEkle({navigation}) {
     const[userId,setUserId]= useState("");
     const[seciliDonem,setSeciliDonem]= useState("");
     const[donem,setDonem]=useState("");
-    const[foto,setFoto]=useState("");
+    const[foto,setFoto]=useState(Placeholder);
 
     const [isUploding, setUploding] = useState(false);
     const [uploadedImg, setUplodedImg] = useState("");

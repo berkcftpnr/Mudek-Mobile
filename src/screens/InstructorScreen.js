@@ -61,6 +61,9 @@ export function InstructorScreen({navigation}) {
           source={ANKU_logo}
       />
       <IconButton style={styles.closeIcon} name={'exit-outline'} onPress ={() => {
+        AsyncStorage.removeItem("name")
+        AsyncStorage.removeItem("id")
+        AsyncStorage.removeItem("level")
         navigation.navigate('Login');//sessionlar eklenecek
   }}/>
       <View style={styles.lineStyle}>
@@ -101,6 +104,8 @@ export function InstructorScreen({navigation}) {
             }else if(seciliDers.length===0){
               alert("DERS SEÇİLMEDİ")
 }           else{
+            AsyncStorage.setItem("donemId",seciliDonem.toString());
+            AsyncStorage.setItem("dersId",seciliDonem.toString());
             navigation.navigate('Lecture');
 
 
