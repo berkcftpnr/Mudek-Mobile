@@ -12,7 +12,7 @@ import MUDEK_logo from '../images/MUDEK.png';
 import PDF_icon from '../images/pdf_icon.png';
 import EKLE_img from '../images/ekle_img.png';
 import Fakulte_logo from '../images/fakulte_logo.png';
-export function Lecture({navigation}) {
+export function Lecturemudek({navigation}) {
   const[donemAdi,setDonemAdi]= useState("");
     const[dersAdi,setDersAdi]= useState("");
 
@@ -47,10 +47,10 @@ setDersAdi( response.data[0].lecture_name);
 
 });
 
-API.post("/api/egitmen/lectureDet",{
+API.post("/api/mudek/lectureDet",{
     dersID:dersValue,
     donemID:value,
-    userID:valueUser
+
 }).then((response) => {
   setdetId( response.data[0].lecture_det_id);
   AsyncStorage.setItem("lecDetId",response.data[0].lecture_det_id.toString())
@@ -103,28 +103,28 @@ API.post("/api/egitmen/lectureDet",{
   const lectureDocSec = (val)=>{
 
       AsyncStorage.setItem("lecDocId",val.lecture_doc_id.toString())
-        navigation.navigate('DersiciGoruntule');
+        navigation.navigate('DersiciGoruntulemudek');
 
   }
 
   const examDocSec = (val)=>{
 
       AsyncStorage.setItem("examDocId",val.exam_doc_id.toString())
-        navigation.navigate('SinavDocGoruntule');
+        navigation.navigate('SinavDocGoruntulemudek');
 
   }
 
   const anketSec = (val)=>{
 
       AsyncStorage.setItem("anketId",val.doc_id.toString())
-      navigation.navigate('AnketGoruntule');
+      navigation.navigate('AnketGoruntulemudek');
 
   }
 
   const kazanimSec = (val)=>{
 
       AsyncStorage.setItem("kazanimId",val.attainments_id.toString())
-        navigation.navigate('KazanimGoruntule');
+        navigation.navigate('KazanimGoruntulemudek');
 
   }
   return (
@@ -135,9 +135,9 @@ API.post("/api/egitmen/lectureDet",{
 
       <IconHome style={styles.homeIcon} size = {20} name={'home-outline'} onPress ={() => {
         AsyncStorage.removeItem("lecDetId")
-        AsyncStorage.removeItem("donemId")
-          AsyncStorage.removeItem("dersId")
-        navigation.navigate('Instructor');//sessionlar eklenecek
+          AsyncStorage.removeItem("donemId")
+            AsyncStorage.removeItem("dersId")
+        navigation.navigate('MudekScreen');//sessionlar eklenecek
       }}/>
       <View style={styles.lineStyle}>
       </View>
@@ -185,22 +185,6 @@ API.post("/api/egitmen/lectureDet",{
 
 
 
-            <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-            </View>
-
-              <TouchableOpacity
-              style={styles.docButton}
-              onPress ={() => {
-                navigation.navigate('DersiciEkle');
-              }}
-              >
-                <View style={styles.containerKoyumaviEkle}>
-                  <Image style={styles.pdfImage}
-                  source={EKLE_img}
-                  />
-                </View>
-
-              </TouchableOpacity>
             </ScrollView>
           </View>
 
@@ -231,22 +215,6 @@ API.post("/api/egitmen/lectureDet",{
 
 
 
-        <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-        </View>
-
-          <TouchableOpacity
-          style={styles.docButton}
-          onPress ={() => {
-            navigation.navigate('SinavDocEkle');
-          }}
-          >
-            <View style={styles.containerKoyumaviEkle}>
-              <Image style={styles.pdfImage}
-              source={EKLE_img}
-              />
-            </View>
-
-          </TouchableOpacity>
         </ScrollView>
       </View>
 
@@ -271,23 +239,6 @@ API.post("/api/egitmen/lectureDet",{
 )}
 
 
-      <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-      </View>
-
-        <TouchableOpacity
-        style={styles.fotoButton}
-        onPress ={() => {
-          navigation.navigate('KazanimEkle');
-        }}
-        >
-          <View style={styles.containerKoyumaviEkleFoto}>
-            <Image style={styles.pdfImage}
-            source={EKLE_img}
-            />
-          </View>
-
-
-          </TouchableOpacity>
         </ScrollView>
       </View>
 
@@ -319,22 +270,6 @@ API.post("/api/egitmen/lectureDet",{
 
 
 
-    <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-    </View>
-
-      <TouchableOpacity
-      style={styles.docButton}
-      onPress ={() => {
-        navigation.navigate('AnketEkle');
-      }}
-      >
-        <View style={styles.containerKoyumaviEkle}>
-          <Image style={styles.pdfImage}
-          source={EKLE_img}
-          />
-        </View>
-
-      </TouchableOpacity>
     </ScrollView>
   </View>
 

@@ -52,7 +52,8 @@ export function InstructorScreen({navigation}) {
 
     }).then((response)=>{
       setDersler(response.data)
-      //setSeciliDers(response.data.[0].lecture_id)
+
+      setSeciliDers(response.data.[0].lecture_id)
     })
 }
   return (
@@ -105,7 +106,7 @@ export function InstructorScreen({navigation}) {
               alert("DERS SEÇİLMEDİ")
 }           else{
             AsyncStorage.setItem("donemId",seciliDonem.toString());
-            AsyncStorage.setItem("dersId",seciliDonem.toString());
+            AsyncStorage.setItem("dersId",seciliDers.toString());
             navigation.navigate('Lecture');
 
 

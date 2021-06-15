@@ -29,6 +29,14 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthStackNavigator} from './src/navigators/AuthStackNavigator';
 
+import {FotoGoruntulemudek} from './src/screens/FotoGoruntulemudek';
+import {DepDocsGoruntulemudek} from './src/screens/DepDocsGoruntulemudek';
+import {DersiciGoruntulemudek} from './src/screens/DersiciGoruntulemudek';
+import {SinavDocGoruntulemudek} from './src/screens/SinavDocGoruntulemudek';
+import {KazanimGoruntulemudek} from './src/screens/KazanimGoruntulemudek';
+import {AnketGoruntulemudek} from './src/screens/AnketGoruntulemudek';
+import {DepDocsmudek} from './src/screens/DepDocsmudek';
+import {Lecturemudek} from './src/screens/Lecturemudek';
 const RootStack = createStackNavigator();
 const AuthStack = createStackNavigator();
 

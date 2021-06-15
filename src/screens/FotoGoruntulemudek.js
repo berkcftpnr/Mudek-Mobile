@@ -13,7 +13,7 @@ import Placeholder from '../images/placeholder.png';
 //import DocumentPicker from 'react-native-document-picker';
 
 
-export function FotoGoruntule({navigation}) {
+export function FotoGoruntulemudek({navigation}) {
 
     const[fotoSrc,setFotoSrc]=useState("http://192.168.1.23:4001/photos/placeholder.png");
     const[fotoId,setFotoId]=useState("");
@@ -55,51 +55,13 @@ API.post("/api/asistan/fotoGoruntule2",{
 
 
 
-    const sil = ()=>{
-
-      API.post("/api/asistan/fotosil",{
-          fotoId:fotoId,
-      }).then((response)=>{
-  navigation.navigate('Asistant');
-  navigation.navigate('DepDocs');
-        if(response.data.message){
-          alert(response.data.message)
-        }
-
-      })
-
-
-    }
-
-
-
-
-
-      const guncelle = ()=>{
-        API.post("/api/asistan/fotoguncelle",{
-                fotoId:fotoId,
-                desc:baslik,
-                exp:aciklama
-            }).then((response)=>{
-
-              if(response.data.message){
-                alert(response.data.message)
-              }
-
-            })
-
-
-
-      }
-
-
 
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
       AsyncStorage.removeItem("fotoId")
-      navigation.navigate('Asistant');
-      navigation.navigate('DepDocs');//sessionlar eklenecek
+
+      navigation.navigate('DepDocsmudek');//sessionlar eklenecek
 
 }}/>
 
@@ -130,23 +92,12 @@ API.post("/api/asistan/fotoGoruntule2",{
           defaultValue={aciklama}
           onChangeText={text => setAciklama(text)}
           />
-              <View style={styles.rowContainer}>
 
-              <FilledButton title={'Güncelle'}
-              style={styles.ekleButton}
-              onPress ={guncelle}
-              />
-
-          <FilledButton title={'Sil'}
-          style={styles.secButton}
-          onPress ={sil}
-
-          />
           <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={async() => {
           //sessionlar eklenecek
           await Linking.openURL(fotoSrc);
       }}/>
-            </View>
+
 
 
 

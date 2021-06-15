@@ -24,6 +24,15 @@ import {DersiciGoruntule} from '../screens/DersiciGoruntule';
 import {SinavDocGoruntule} from '../screens/SinavDocGoruntule';
 import {KazanimGoruntule} from '../screens/KazanimGoruntule';
 import {AnketGoruntule} from '../screens/AnketGoruntule';
+
+import {DepDocsmudek} from '../screens/DepDocsmudek';
+import {Lecturemudek} from '../screens/Lecturemudek';
+import {FotoGoruntulemudek} from '../screens/FotoGoruntulemudek';
+import {DepDocsGoruntulemudek} from '../screens/DepDocsGoruntulemudek';
+import {DersiciGoruntulemudek} from '../screens/DersiciGoruntulemudek';
+import {SinavDocGoruntulemudek} from '../screens/SinavDocGoruntulemudek';
+import {KazanimGoruntulemudek} from '../screens/KazanimGoruntulemudek';
+import {AnketGoruntulemudek} from '../screens/AnketGoruntulemudek';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -43,7 +52,7 @@ export function AuthStackNavigator() {
         <AuthStack.Screen name={'Registration'} component={RegistrationScreen} />
           <AuthStack.Screen name={'Asistant'} component={AsistantScreen} />
           <AuthStack.Screen name={'Instructor'} component={InstructorScreen} />
-          <AuthStack.Screen name={'Mudek'} component={MudekScreen} />
+          <AuthStack.Screen name={'MudekScreen'} component={MudekScreen} />
           <AuthStack.Screen name={'Pending'} component={Pending} />
           <AuthStack.Screen name={'Pending2'} component={Pending2} />
           <AuthStack.Screen name={'DepDocs'} component={DepDocs} />
@@ -61,6 +70,15 @@ export function AuthStackNavigator() {
           <AuthStack.Screen name={'SinavDocGoruntule'} component={SinavDocGoruntule} />
           <AuthStack.Screen name={'KazanimGoruntule'} component={KazanimGoruntule} />
           <AuthStack.Screen name={'AnketGoruntule'} component={AnketGoruntule} />
+
+          <AuthStack.Screen name={'FotoGoruntulemudek'} component={FotoGoruntulemudek} />
+          <AuthStack.Screen name={'DepDocsGoruntulemudek'} component={DepDocsGoruntulemudek} />
+          <AuthStack.Screen name={'DersiciGoruntulemudek'} component={DersiciGoruntulemudek} />
+          <AuthStack.Screen name={'SinavDocGoruntulemudek'} component={SinavDocGoruntulemudek} />
+          <AuthStack.Screen name={'KazanimGoruntulemudek'} component={KazanimGoruntulemudek} />
+          <AuthStack.Screen name={'AnketGoruntulemudek'} component={AnketGoruntulemudek} />
+          <AuthStack.Screen name={'DepDocsmudek'} component={DepDocsmudek} />
+          <AuthStack.Screen name={'Lecturemudek'} component={Lecturemudek} />
           <AuthStack.Screen name={'Contact'} component={Contact} />
       </AuthStack.Navigator>
 

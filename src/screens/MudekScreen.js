@@ -14,7 +14,9 @@ export function MudekScreen({navigation}) {
     const[kullanıcıAdi,setKullaniciAdi]= useState("");
     const[seciliDonem,setSeciliDonem]= useState("");
     const[donemler,setDonemler]=useState([]);
+    const[seciliDonemDep,setSeciliDonemDep]= useState("");
     const[dersler,setDersler]=useState([]);
+    const[seciliDers,setSeciliDers]= useState("");
     React.useEffect(() => {
     AsyncStorage.getItem('name').then((value)=>{
       setKullaniciAdi(value)
@@ -33,9 +35,25 @@ export function MudekScreen({navigation}) {
 
   }, []);
 
+  function donemDegis (itemValue)  {
+    setSeciliDonem(itemValue)
+
+    API.post("/api/admin/dersGoruntuleAnaSayfa",{
+        donem_id: itemValue,
+
+
+    }).then((response)=>{
+      setDersler(response.data)
+      setSeciliDers(response.data.[0].lecture_id)
+    })
+}
+
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'exit-outline'} onPress ={() => {
+      AsyncStorage.removeItem("name")
+      AsyncStorage.removeItem("id")
+      AsyncStorage.removeItem("level")
       navigation.navigate('Login');//sessionlar eklenecek
 }}/>
 
@@ -57,7 +75,7 @@ export function MudekScreen({navigation}) {
           <Picker style={styles.rol_secimi}
             selectedValue={seciliDonem}
             style={{ height: 50, width: 300 }}
-            onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
+            onValueChange={(itemValue, itemIndex) => donemDegis(itemValue)}
           >
           {donemler.map((val)=>
                 <Picker.Item label={val.name} value={val.semester_id} key={val.semester_id}/>
@@ -67,9 +85,9 @@ export function MudekScreen({navigation}) {
           <View style={styles.lineStyle}>
           </View>
           <Picker style={styles.rol_secimi}
-            selectedValue={seciliDonem}
+            selectedValue={seciliDers}
             style={{ height: 50, width: 300 }}
-            onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
+            onValueChange={(itemValue, itemIndex) => setSeciliDers(itemValue)}
           >
           {dersler.map((val)=>
               <Picker.Item label={val.lecture_code +"  "+val.lecture_name} value={val.lecture_id} key={val.lecture_id}/>
@@ -81,7 +99,17 @@ export function MudekScreen({navigation}) {
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
-            alert("Bölüm Dökümanları Sayfası")
+            if(seciliDonem.length===0){
+              alert("DÖNEM SEÇİLMEDİ")
+            }else if(seciliDers.length===0){
+              alert("DERS SEÇİLMEDİ")
+}           else{
+            AsyncStorage.setItem("donemId",seciliDonem.toString());
+            AsyncStorage.setItem("dersId",seciliDers.toString());
+            navigation.navigate('Lecturemudek');
+
+
+}
           }}
           />
           <View style={styles.lineStyle}>
@@ -93,9 +121,9 @@ export function MudekScreen({navigation}) {
           <View style={styles.lineStyle}>
           </View>
           <Picker style={styles.rol_secimi}
-            selectedValue={seciliDonem}
+            selectedValue={seciliDonemDep}
             style={{ height: 50, width: 300 }}
-            onValueChange={(itemValue, itemIndex) => setSeciliDonem(itemValue)}
+            onValueChange={(itemValue, itemIndex) => setSeciliDonemDep(itemValue)}
           >
           {donemler.map((val)=>
                 <Picker.Item label={val.name} value={val.semester_id} key={val.semester_id}/>
@@ -107,8 +135,13 @@ export function MudekScreen({navigation}) {
           <FilledButton title={'Seç'}
           style={styles.secButton}
           onPress ={() => {
-            alert("Bölüm Dökümanları Sayfası")
-          }}
+            if(seciliDonem.length===0){
+              alert("Dönem Seçiniz")
+            }else{
+            AsyncStorage.setItem("donemId",seciliDonemDep.toString());
+
+            navigation.navigate('DepDocsmudek');
+          }  }}
           />
 
       <StatusBar style="auto" />

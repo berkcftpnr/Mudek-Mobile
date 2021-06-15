@@ -155,12 +155,12 @@ alert("Evrak Seçiniz")
           maxLength={500}
           onChangeText={text => setAciklama(text)}
           />
-          <FilledButton title={'Seç'}
-          style={styles.secButton}
+          <FilledButton title={'Döküman Seç'}
+          style={styles.ekleButton}
           onPress ={sec}
           />
           <FilledButton title={'Ekle'}
-          style={styles.ekleButton}
+          style={styles.secButton}
           onPress ={ekle}
           />
       <StatusBar style="auto" />
@@ -194,8 +194,8 @@ const styles = StyleSheet.create({
   },
   secButton: {
       marginVertical: 20,
-      marginHorizontal: 130,
-      width:'22%'
+      marginHorizontal: 122,
+      width:'26%'
 
   },closeIcon: {
     position: 'absolute',

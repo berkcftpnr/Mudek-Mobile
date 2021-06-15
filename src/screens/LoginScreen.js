@@ -34,7 +34,7 @@ export function LoginScreen({navigation}) {
 
     switch (response.data[0].authlevel_m) {
          case 0:
-                 navigation.navigate('Mudek');//window.location.href = 'admin/';
+                 navigation.navigate('MudekScreen');//window.location.href = 'admin/';
                  break;
              case 1:
                  navigation.navigate('Instructor');//
@@ -43,7 +43,7 @@ export function LoginScreen({navigation}) {
                  navigation.navigate('Asistant');
                  break;
              case 3:
-                 navigation.navigate('Mudek');//mudek
+                 navigation.navigate('MudekScreen');//mudek
                  break;
              case 4:
                  navigation.navigate('Pending');//window.location.href = 'pending/';

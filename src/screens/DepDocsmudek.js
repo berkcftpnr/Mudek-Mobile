@@ -15,7 +15,7 @@ import EKLE_img from '../images/ekle_img.png';
 import Fakulte_logo from '../images/fakulte_logo.png';
 
 
-export function DepDocs({navigation}) {
+export function DepDocsmudek({navigation}) {
   const[donemAdi,setDonemAdi]= useState("");
   const[foto,setFoto]=useState([]);
 const[userId,setUserId]= useState("");
@@ -38,17 +38,17 @@ const[docs,setDocs]= useState([]);
 
 });
 
-API.post("/api/asistan/fotoGoruntule",{
+API.post("/api/mudek/fotoGoruntule",{
     donemID:value,
-    userID:valueUser
+
         }).then((response) => {
 
   setFoto( response.data );
 });
 
-API.post("/api/asistan/docGoruntule",{
+API.post("/api/mudek/docGoruntule",{
     donemID:value,
-    userID:valueUser
+
         }).then((response) => {
 
   setDocs( response.data );
@@ -67,7 +67,7 @@ API.post("/api/asistan/docGoruntule",{
   const docSec = (val)=>{
 
       AsyncStorage.setItem("docId",val.department_doc_id.toString())
-        navigation.navigate('DepDocsGoruntule');
+        navigation.navigate('DepDocsGoruntulemudek');
 
   }
 
@@ -75,7 +75,7 @@ const fotoSec = (val)=>{
 
 
     AsyncStorage.setItem("fotoId",val.photos_id.toString())
-      navigation.navigate('FotoGoruntule');
+      navigation.navigate('FotoGoruntulemudek');
 
 }
 
@@ -89,7 +89,7 @@ const fotoSec = (val)=>{
       />
       <IconHome style={styles.homeIcon} size = {20} name={'home-outline'} onPress ={() => {
         AsyncStorage.removeItem("donemId")
-        navigation.navigate('Asistant');//sessionlar eklenecek
+        navigation.navigate('MudekScreen');//sessionlar eklenecek
 
       }}/>
     <View style={styles.lineStyle}>
@@ -133,22 +133,7 @@ const fotoSec = (val)=>{
               </View>
             </TouchableOpacity>
 )}
-          <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-          </View>
 
-            <TouchableOpacity
-            style={styles.docButton}
-            onPress ={() => {
-              navigation.navigate('DepDocsEkle');
-            }}
-            >
-              <View style={styles.containerKoyumaviEkle}>
-                <Image style={styles.pdfImage}
-                source={EKLE_img}
-                />
-              </View>
-
-            </TouchableOpacity>
           </ScrollView>
         </View>
 
@@ -173,22 +158,6 @@ const fotoSec = (val)=>{
             </View>
           </TouchableOpacity>
 )}
-        <View style={{height:'100%',width:15,backgroundColor:'#8cb8ff'}}>
-        </View>
-
-          <TouchableOpacity
-          style={styles.fotoButton}
-          onPress ={() => {
-            navigation.navigate('FotoEkle');
-          }}
-          >
-            <View style={styles.containerKoyumaviEkleFoto}>
-              <Image style={styles.pdfImage}
-              source={EKLE_img}
-              />
-            </View>
-
-          </TouchableOpacity>
         </ScrollView>
       </View>
 

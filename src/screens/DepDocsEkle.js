@@ -127,12 +127,12 @@ export function DepDocsEkle({navigation}) {
           />
           <View style={styles.lineStyle}>
           </View>
-          <FilledButton title={'Seç'}
-          style={styles.secButton}
+          <FilledButton title={'Döküman Seç'}
+          style={styles.ekleButton}
           onPress ={sec}
           />
           <FilledButton title={'Ekle'}
-          style={styles.ekleButton}
+          style={styles.secButton}
           onPress ={ekle}
           />
       <StatusBar style="auto" />

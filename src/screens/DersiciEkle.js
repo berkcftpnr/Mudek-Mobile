@@ -103,7 +103,7 @@ export function DersiciEkle({navigation}) {
       />
       <View style={styles.lineStyle}>
       </View>
-          <Heading style= {styles.title} >Sınav Dökümanı Ekleyiniz</Heading>
+          <Heading style= {styles.title} >Ders Dökümanı Ekleyiniz</Heading>
           <View style={styles.lineStyle}>
           </View>
           <Input style={styles.input}
@@ -121,12 +121,12 @@ export function DersiciEkle({navigation}) {
           />
           <View style={styles.lineStyle}>
           </View>
-          <FilledButton title={'Seç'}
-          style={styles.secButton}
+          <FilledButton title={'Döküman Seç'}
+          style={styles.ekleButton}
           onPress ={sec}
           />
           <FilledButton title={'Ekle'}
-          style={styles.ekleButton}
+          style={styles.secButton}
           onPress ={ekle}
           />
       <StatusBar style="auto" />

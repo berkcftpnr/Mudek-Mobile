@@ -13,38 +13,32 @@ import Placeholder from '../images/placeholder.png';
 //import DocumentPicker from 'react-native-document-picker';
 
 
-export function FotoGoruntule({navigation}) {
-
-    const[fotoSrc,setFotoSrc]=useState("http://192.168.1.23:4001/photos/placeholder.png");
-    const[fotoId,setFotoId]=useState("");
 
 
 
-    const [aciklama, setAciklama] = useState("");
-    const [baslik, setBaslik] = useState("");
+export function KazanimGoruntulemudek({navigation}) {
+
+  const[docId,setDocId]=useState("");
+
+
+
+  const [aciklama, setAciklama] = useState("");
+  const [baslik, setBaslik] = useState("");
     React.useEffect(() => {
 
-    AsyncStorage.getItem('fotoId').then((value)=>{
+      AsyncStorage.getItem('kazanimId').then((value)=>{
+      API.post("/api/egitmen/kazanimiGoruntule",{
+          docID:value,
+
+              }).then((response) => {
+
+        setBaslik(response.data[0].attainment_type)
+        setAciklama(response.data[0].explanation)
+        setDocId(value)
+      });
 
 
-API.post("/api/asistan/fotoGoruntule2",{
-    fotoId:value,
-
-        }).then((response) => {
-
-  setFotoSrc( response.data[0].path );
-  setBaslik(response.data[0].doc_desc)
-  setAciklama(response.data[0].explanation)
-  setFotoId(value)
-});
-
-
-    })
-
-
-
-
-
+          })
 
 
   }, []);
@@ -55,51 +49,15 @@ API.post("/api/asistan/fotoGoruntule2",{
 
 
 
-    const sil = ()=>{
-
-      API.post("/api/asistan/fotosil",{
-          fotoId:fotoId,
-      }).then((response)=>{
-  navigation.navigate('Asistant');
-  navigation.navigate('DepDocs');
-        if(response.data.message){
-          alert(response.data.message)
-        }
-
-      })
-
-
-    }
-
-
-
-
-
-      const guncelle = ()=>{
-        API.post("/api/asistan/fotoguncelle",{
-                fotoId:fotoId,
-                desc:baslik,
-                exp:aciklama
-            }).then((response)=>{
-
-              if(response.data.message){
-                alert(response.data.message)
-              }
-
-            })
-
-
-
-      }
 
 
 
   return (
     <View style={styles.container}>
     <IconButton style={styles.closeIcon} name={'close-circle-outline'} onPress ={() => {
-      AsyncStorage.removeItem("fotoId")
-      navigation.navigate('Asistant');
-      navigation.navigate('DepDocs');//sessionlar eklenecek
+      AsyncStorage.removeItem("kazanimId")
+
+      navigation.navigate('Lecturemudek');//sessionlar eklenecek
 
 }}/>
 
@@ -108,19 +66,13 @@ API.post("/api/asistan/fotoGoruntule2",{
       />
       <View style={styles.lineStyle}>
       </View>
+
           <Heading style= {styles.title} >{baslik}</Heading>
           <View style={styles.lineStyle}>
           </View>
           <ScrollView style={styles.scrollView} >
-          <Image style={styles.selected_image}
-                  source={{uri:fotoSrc}}
-              />
-          <Input style={styles.input}
-          placeholder={'Başlık'}
-          maxLength={15}
-          onChangeText={text => setBaslik(text)}
-          defaultValue={baslik}
-          />
+
+
 
           <Input style={styles.input}
           multiline = {true}
@@ -130,23 +82,7 @@ API.post("/api/asistan/fotoGoruntule2",{
           defaultValue={aciklama}
           onChangeText={text => setAciklama(text)}
           />
-              <View style={styles.rowContainer}>
-
-              <FilledButton title={'Güncelle'}
-              style={styles.ekleButton}
-              onPress ={guncelle}
-              />
-
-          <FilledButton title={'Sil'}
-          style={styles.secButton}
-          onPress ={sil}
-
-          />
-          <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={async() => {
-          //sessionlar eklenecek
-          await Linking.openURL(fotoSrc);
-      }}/>
-            </View>
+            
 
 
 
@@ -213,7 +149,7 @@ rowContainer: {
 ekleButton: {
       marginVertical: 40,
       width:'32%',
-      marginHorizontal:15,
+      marginHorizontal:35,
       height:60
 
   },
