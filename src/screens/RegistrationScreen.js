@@ -96,20 +96,25 @@ export function RegistrationScreen({navigation}) {
 
     </View>
     <Heading style= {styles.title} >Üye Ol</Heading>
+
       <ScrollView style={styles.scrollView} >
 
 
 
       <Error error={''} />
+      <View style={styles.lineStyle}>
+      </View>
       <Picker style={styles.rol_secimi}
         selectedValue={selectedValue}
-        style={{ height: 50, width: 150 }}
+        style={{ height: 50, width: 360 }}
         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
       >
         <Picker.Item label="Asistan" value="5" />
         <Picker.Item label="Eğitmen" value="4" />
         <Picker.Item label="Mudek-Yetkilisi" value="6" />
       </Picker>
+      <View style={styles.lineStyle}>
+      </View>
       <Input style={styles.input}
       placeholder={"E-mail"}
       keyboardType= "email-address"
@@ -158,7 +163,7 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    marginBottom: 0,
+    marginTop: 10,
   },
   input: {
       marginVertical: 8,
@@ -197,11 +202,18 @@ const styles = StyleSheet.create({
   },
   rol_secimi: {
     marginVertical:8,
+
   },
 
   rowContainer: {
       flexDirection: 'row',
       margin: 5,
   },
+    lineStyle:{
+            borderWidth: 0.5,
+            borderColor:'#16394e',
+            margin:5,
+            width: '100%',
+       },
 
 });

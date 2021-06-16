@@ -74,18 +74,13 @@ export function SinavDocGoruntulemudek({navigation}) {
       <View style={styles.lineStyle}>
       </View>
 
+
           <Heading style= {styles.title} >{baslik}</Heading>
           <View style={styles.lineStyle}>
           </View>
           <ScrollView style={styles.scrollView} >
 
-          <Input style={styles.input}
-          placeholder={'Başlık'}
-          maxLength={15}
-          onChangeText={text => setBaslik(text)}
-          defaultValue={baslik}
-          />
-          <Text style={styles.araBaslik}>Sınav Türü Seçiniz</Text>
+          <Text style={styles.araBaslik}>Sınav Türü </Text>
           <View style={styles.lineStyle}>
           </View>
           <Picker style={styles.rol_secimi}
@@ -101,13 +96,14 @@ export function SinavDocGoruntulemudek({navigation}) {
           </Picker>
           <View style={styles.lineStyle}>
           </View>
-          <Text style={styles.araBaslik}>Sınav Derecesi Seçiniz</Text>
+          <Text style={styles.araBaslik}>Sınav Derecesi </Text>
           <View style={styles.lineStyle}>
           </View>
           <Picker style={styles.rol_secimi}
             selectedValue={selectedValueDerece}
             style={{ height: 50, width: 300 }}
             onValueChange={(itemValue, itemIndex) => setSelectedValueDerece(itemValue)}
+
           >
             <Picker.Item label="En Yüksek" value="1" />
             <Picker.Item label="Orta" value="2" />
@@ -123,15 +119,23 @@ export function SinavDocGoruntulemudek({navigation}) {
           maxLength={500}
           defaultValue={aciklama}
           onChangeText={text => setAciklama(text)}
+
           />
 
-          <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={async() => {
-          //sessionlar eklenecek
-          await Linking.openURL(docSrc);
-      }}/>
+          <View style={styles.rowContainer}>
 
 
 
+      <FilledButton title={'İNDİR'}
+      style={styles.secButton}
+      onPress ={async() => {
+      //sessionlar eklenecek
+      await Linking.openURL(docSrc);
+      }}
+
+      />
+
+        </View>
 
       <StatusBar style="auto" />
       </ScrollView >
@@ -164,9 +168,9 @@ const styles = StyleSheet.create({
 
   },
   secButton: {
-      marginVertical: 40,
+      marginVertical: 30,
       width:'32%',
-      marginHorizontal:15,
+      marginHorizontal:130,
       height: 60,
 
 
@@ -207,9 +211,11 @@ ekleButton: {
 
   },
   download_icon: {
-    position: 'absolute',
-    top: 50,
-    right: 20,
+    marginVertical: 20,
+
+    marginHorizontal:180,
+    zIndex: 3,
+
 
   },
   araBaslik: {

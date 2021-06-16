@@ -73,12 +73,6 @@ export function DersiciGoruntulemudek({navigation}) {
           </View>
           <ScrollView style={styles.scrollView} >
 
-          <Input style={styles.input}
-          placeholder={'Başlık'}
-          maxLength={15}
-          onChangeText={text => setBaslik(text)}
-          defaultValue={baslik}
-          />
 
           <Input style={styles.input}
           multiline = {true}
@@ -89,10 +83,20 @@ export function DersiciGoruntulemudek({navigation}) {
           onChangeText={text => setAciklama(text)}
           />
 
-          <IconButton style={styles.download_icon} name={'arrow-down-circle'} onPress ={async() => {
-          //sessionlar eklenecek
-          await Linking.openURL(docSrc);
-      }}/>
+          <View style={styles.rowContainer}>
+
+
+
+      <FilledButton title={'İNDİR'}
+      style={styles.secButton}
+      onPress ={async() => {
+      //sessionlar eklenecek
+      await Linking.openURL(docSrc);
+      }}
+
+      />
+
+        </View>
 
 
 
@@ -128,9 +132,9 @@ const styles = StyleSheet.create({
 
   },
   secButton: {
-      marginVertical: 40,
+      marginVertical: 30,
       width:'32%',
-      marginHorizontal:15,
+      marginHorizontal:130,
       height: 60,
 
 
@@ -158,9 +162,9 @@ rowContainer: {
     margin: 5,
 },
 ekleButton: {
-      marginVertical: 40,
+      marginVertical: 30,
       width:'32%',
-      marginHorizontal:15,
+      marginHorizontal:140,
       height:60
 
   },
