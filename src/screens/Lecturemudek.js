@@ -309,10 +309,11 @@ const styles = StyleSheet.create({
   },
 
   titletop: {
-      marginBottom: 5,
-      marginTop: 5,
-      textAlign:'center',
-      fontSize:21,
+    marginBottom: 5,
+    marginTop: 5,
+    textAlign:'center',
+    fontSize:21,
+      marginHorizontal:55
   },
 
   ANKU_logo: {
@@ -325,9 +326,9 @@ const styles = StyleSheet.create({
     height:50,
     width:50,
     position: 'absolute',
-    top: 15,
-    right: 245,
-    marginRight: 5
+    top: -5,
+    left:0
+
   },
 
   containerAcikmavi: {

@@ -96,7 +96,7 @@ API.post("/api/asistan/fotoGoruntule2",{
       style={styles.secButton}
       onPress ={async() => {
       //sessionlar eklenecek
-      await Linking.openURL(docSrc);
+      await Linking.openURL(fotoSrc);
       }}
 
       />
