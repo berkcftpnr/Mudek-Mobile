@@ -5,11 +5,11 @@ import { StyleSheet,  TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
-export function IconButton({name, style, onPress}) {
+export function IconHome({name, style, onPress}) {
   return (
 
       <TouchableOpacity style= {[styles.container, style]} onPress={onPress}>
-        <Icon size = {40} name = {name} color={'#16394e'} />
+        <Icon size = {32} name = {name} color={'#16394e'} />
 
       </TouchableOpacity>
 
